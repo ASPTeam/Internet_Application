@@ -11,7 +11,8 @@ namespace Projects_Management_System.Controllers
         // GET: Default
         public ActionResult Index()
         {
-            return View();
+
+            return View("rami");
         }
     }
 }
