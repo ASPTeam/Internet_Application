@@ -12,7 +12,7 @@ namespace Projects_Management_System.Controllers
         public ActionResult Index()
         {
 
-            return View("rami mmohsen");
+            return View("rami m.mohsen");
         }
     }
 }
