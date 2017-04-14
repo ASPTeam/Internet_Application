@@ -1,7 +1,64 @@
-﻿
-@{
-    ViewBag.Title = "Projects Management System";
+﻿@{
+    Layout = null;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Managementa.com</title>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet1.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-inverse ">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Managementa.com</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">My Account</a></li>
 
-<h2>Index</h2>
-
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" >
+        <div class="jumbotron">
+            <h1>Experts at making your work easy</h1>
+            <p>manage,simplfy and meke it simpler for you <span class="glyphicon glyphicon-ok"></span> </p>
+            <p>just write your project discription and get started <span class="glyphicon glyphicon-ok"></span> </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="sidebarContent">
+                    <label style="color:white" for="comment">post new project</label>
+                    <textarea class="form-control" placeholder="type your project discription" rows="10" id="comment"></textarea>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-success btn btn-lg"><span class="glyphicon glyphicon-pencil"></span> Post</button>
+            </div>
+            <div class="col-lg-8 col-md-6">
+               <div class="mainContent"></div>
+            </div>
+        </div> 
+    </div>
+   <div class="navbar navbar-inverse " >
+       <p style="color:white" class="text-center text-capitalize">all rights reserved &copy;</p>
+       <p style="color:white" class="text-center">@DateTime.Now.Year</p>
+   </div>
+</body>
+</html>
