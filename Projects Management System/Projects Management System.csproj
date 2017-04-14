@@ -115,6 +115,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Customers\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="images\rsz_project-management-1400x951-31.jpg" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
