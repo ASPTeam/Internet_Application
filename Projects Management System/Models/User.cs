@@ -14,10 +14,11 @@ namespace Projects_Management_System.Models
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using System.Web.Mvc;
+   
 
-    public partial class systemuser
+    public partial class User
     {
-        [Key]
+       [Key]
         public int ID { get; set; }
 
         [Required(ErrorMessage = "User name is required")]
@@ -28,11 +29,13 @@ namespace Projects_Management_System.Models
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
+        [MinLength(6,ErrorMessage ="Password length must be at least 6 ")]
         public string password { get; set; }
 
 
         [Required(ErrorMessage = "Email is required")]
         [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Enter a valid Email ")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         public byte[] Photo { get; set; }
@@ -67,6 +70,13 @@ namespace Projects_Management_System.Models
         [HiddenInput(DisplayValue = false)]
         public int Type { get; set; }
 
-        public virtual User_Type User_Type { get; set; }
+
+        [Display(Name ="Confirm Password")]
+        [DataType(DataType.Password)]
+        [System.ComponentModel.DataAnnotations.Compare("password", ErrorMessage = "password don not match ")]
+        public string confirmpassword { get; set; }
+
+        public bool IsEmailVerified { get; set; }
+        public System.Guid ActivationCode { get; set; }
     }
 }

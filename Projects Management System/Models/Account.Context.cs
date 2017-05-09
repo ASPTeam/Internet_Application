@@ -13,10 +13,10 @@ namespace Projects_Management_System.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class Managment : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public Managment()
+            : base("name=Managment")
         {
         }
     
@@ -25,7 +25,6 @@ namespace Projects_Management_System.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User_Type> User_Types { get; set; }
-        public virtual DbSet<systemuser> systemusers { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

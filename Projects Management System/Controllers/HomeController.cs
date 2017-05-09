@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Projects_Management_System.Models;
-using System.IO;
+
 
 namespace Projects_Management_System.Controllers
 {
@@ -15,14 +15,18 @@ namespace Projects_Management_System.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public ActionResult register()
         {
 
             return View();
         }
+
+
+
         [HttpPost]
-        public ActionResult register(systemuser user)
+        public ActionResult register(User user)
         {
           
             if (ModelState.IsValid)
@@ -31,11 +35,11 @@ namespace Projects_Management_System.Controllers
                 user.File.InputStream.Read(data, 0, user.File.ContentLength);
                 user.Photo = data;
                
-                using (Entities db = new Entities())
+                using (Managment db = new Managment())
                 {
-                    if (!db.systemusers.Any(e=>e.Email==user.Email))
+                    if (!db.Users.Any(e=>e.Email==user.Email))
                     {
-                        db.systemusers.Add(user);
+                        db.Users.Add(user);
                         db.SaveChanges();
                         return RedirectToAction("login", "Home");
                     }
@@ -52,17 +56,50 @@ namespace Projects_Management_System.Controllers
             return View();
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpGet]
         public ActionResult login()
         {
             return View();
         }
         [HttpPost]
-        public  ActionResult login(systemuser user)
+        public  ActionResult login(User user)
         {
-            using (Entities db = new Entities())
+            using (Managment db = new Managment())
             {
-                var usr = db.systemusers.FirstOrDefault(x => x.User_Name == user.User_Name && x.password == user.password);
+                var usr = db.Users.FirstOrDefault(x => x.User_Name == user.User_Name && x.password == user.password);
                 if (usr !=null )
                 {
                     Session["userID"] = usr.ID.ToString();
