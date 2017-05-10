@@ -29,12 +29,12 @@ namespace Projects_Management_System.Models
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        [MinLength(6,ErrorMessage ="Password length must be at least 6 ")]
+        [MinLength(6,ErrorMessage = "Password length must be at least 6 characters")]
         public string password { get; set; }
 
-
+        
         [Required(ErrorMessage = "Email is required")]
-        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Enter a valid Email ")]
+        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Enter a valid Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
@@ -47,7 +47,7 @@ namespace Projects_Management_System.Models
         public HttpPostedFileBase File { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        [Required(ErrorMessage = "Please enter the job Description ")]
+        [Required(ErrorMessage = "Please enter the job Description")]
         [Display(Name = "Job Description")]
         public string Job_Description { get; set; }
 
@@ -73,7 +73,7 @@ namespace Projects_Management_System.Models
 
         [Display(Name ="Confirm Password")]
         [DataType(DataType.Password)]
-        [System.ComponentModel.DataAnnotations.Compare("password", ErrorMessage = "password don not match ")]
+        [System.ComponentModel.DataAnnotations.Compare("password", ErrorMessage = "passwords doesn't match ")]
         public string confirmpassword { get; set; }
 
         public bool IsEmailVerified { get; set; }

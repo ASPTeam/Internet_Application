@@ -10,7 +10,7 @@ namespace Projects_Management_System.Areas.Customers.Controllers
 {
     public class HomeController : Controller
     {
-        
+        [Authorize]
         public ActionResult Index()
         {
             return View();

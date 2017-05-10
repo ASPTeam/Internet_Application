@@ -201,6 +201,7 @@
     <Compile Include="Areas\PMs\PMsAreaRegistration.cs" />
     <Compile Include="Areas\TLs\TLsAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -219,6 +220,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Account.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\login.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>Account.tt</DependentUpon>
     </Compile>
@@ -233,10 +235,11 @@
     <Content Include="Areas\TLs\Views\web.config" />
     <Content Include="Areas\JEs\Views\web.config" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Home\register.cshtml" />
+    <Content Include="Views\Home\verifyAccount.cshtml" />
+    <Content Include="Views\Home\login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
