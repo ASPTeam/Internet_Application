@@ -1,0 +1,1140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asign Projects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project Manager ID" Type="int" Nullable="false" />
+          <Property Name="User ID" Type="int" Nullable="false" />
+          <Property Name="post ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project Manager ID" Type="int" Nullable="false" />
+          <Property Name="Post ID" Type="int" Nullable="false" />
+          <Property Name="Comment Description" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Give Evluations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Team leader ID" Type="int" Nullable="false" />
+          <Property Name="Project Manager ID" Type="int" Nullable="false" />
+          <Property Name="JES" Type="int" Nullable="false" />
+          <Property Name="Evaluations" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Give Feedback">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Team Leader ID" Type="int" Nullable="false" />
+          <Property Name="Project Manager ID" Type="int" Nullable="false" />
+          <Property Name="Feedback" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Make Reports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer ID" Type="int" Nullable="false" />
+          <Property Name="Project Manager ID" Type="int" Nullable="false" />
+          <Property Name="Report" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User ID" Type="int" Nullable="false" />
+          <Property Name="post Description" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="POST ID" Type="int" Nullable="false" />
+          <Property Name="Project Manager ID" Type="int" Nullable="false" />
+          <Property Name="Project ype" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project ID" Type="int" Nullable="false" />
+          <Property Name="Pro type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Responding Posts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post ID" Type="int" Nullable="false" />
+          <Property Name="Admin ID" Type="int" Nullable="false" />
+          <Property Name="post stat" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Responding Request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User ID" Type="int" Nullable="false" />
+          <Property Name="Request ID" Type="int" Nullable="false" />
+          <Property Name="Respond" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sending Requests">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sender ID" Type="int" Nullable="false" />
+          <Property Name="Reciever ID" Type="int" Nullable="false" />
+          <Property Name="Project ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Job Description" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="First Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Asign Projects_Asign Projects">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Asign Projects" Type="Self.Asign Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Asign Projects">
+              <PropertyRef Name="post ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asign Projects_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Asign Projects" Type="Self.Asign Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Asign Projects">
+              <PropertyRef Name="Project Manager ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asign Projects_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Asign Projects" Type="Self.Asign Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Asign Projects">
+              <PropertyRef Name="User ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Posts">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="Post ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="Project Manager ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give Evluations_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Give Evluations" Type="Self.Give Evluations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give Evluations">
+              <PropertyRef Name="JES" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give Evluations_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Give Evluations" Type="Self.Give Evluations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give Evluations">
+              <PropertyRef Name="Project Manager ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give Evluations_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Give Evluations" Type="Self.Give Evluations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give Evluations">
+              <PropertyRef Name="Team leader ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give Feedback_Give Feedback">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Give Feedback" Type="Self.Give Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give Feedback">
+              <PropertyRef Name="Project Manager ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give Feedback_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Give Feedback" Type="Self.Give Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give Feedback">
+              <PropertyRef Name="Team Leader ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Make Reports_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Make Reports" Type="Self.Make Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Make Reports">
+              <PropertyRef Name="Customer ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Make Reports_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Make Reports" Type="Self.Make Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Make Reports">
+              <PropertyRef Name="Project Manager ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="User ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project type_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="Project type" Type="Self.Project type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project type">
+              <PropertyRef Name="Project ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Project">
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Posts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="POST ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Project" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="Project Manager ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responding Posts_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Responding Posts" Type="Self.Responding Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Responding Posts">
+              <PropertyRef Name="Admin ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responding Request_Responding Request">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Responding Request" Type="Self.Responding Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Responding Request">
+              <PropertyRef Name="User ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responding Request_Sending Requests">
+          <End Role="Sending Requests" Type="Self.Sending Requests" Multiplicity="1" />
+          <End Role="Responding Request" Type="Self.Responding Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sending Requests">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Responding Request">
+              <PropertyRef Name="Request ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sending Requests_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Sending Requests" Type="Self.Sending Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sending Requests">
+              <PropertyRef Name="Sender ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sending Requests_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Sending Requests" Type="Self.Sending Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sending Requests">
+              <PropertyRef Name="Reciever ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Asign Projects" EntityType="Self.Asign Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Give Evluations" EntityType="Self.Give Evluations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Give Feedback" EntityType="Self.Give Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Make Reports" EntityType="Self.Make Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project type" EntityType="Self.Project type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responding Posts" EntityType="Self.Responding Posts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responding Request" EntityType="Self.Responding Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sending Requests" EntityType="Self.Sending Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Asign Projects_Asign Projects" Association="Self.FK_Asign Projects_Asign Projects">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Asign Projects" EntitySet="Asign Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asign Projects_User" Association="Self.FK_Asign Projects_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Asign Projects" EntitySet="Asign Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asign Projects_User1" Association="Self.FK_Asign Projects_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Asign Projects" EntitySet="Asign Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Posts" Association="Self.FK_Comments_Posts">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_User" Association="Self.FK_Comments_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give Evluations_User" Association="Self.FK_Give Evluations_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Give Evluations" EntitySet="Give Evluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give Evluations_User1" Association="Self.FK_Give Evluations_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Give Evluations" EntitySet="Give Evluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give Evluations_User2" Association="Self.FK_Give Evluations_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Give Evluations" EntitySet="Give Evluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give Feedback_Give Feedback" Association="Self.FK_Give Feedback_Give Feedback">
+            <End Role="User" EntitySet="User" />
+            <End Role="Give Feedback" EntitySet="Give Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give Feedback_User" Association="Self.FK_Give Feedback_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Give Feedback" EntitySet="Give Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Make Reports_User" Association="Self.FK_Make Reports_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Make Reports" EntitySet="Make Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Make Reports_User1" Association="Self.FK_Make Reports_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Make Reports" EntitySet="Make Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_User" Association="Self.FK_Posts_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project type_Project" Association="Self.FK_Project type_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Project type" EntitySet="Project type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Project" Association="Self.FK_Project_Project">
+            <End Role="Posts" EntitySet="Posts" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_User" Association="Self.FK_Project_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Project" EntitySet="Project" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responding Posts_User" Association="Self.FK_Responding Posts_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Responding Posts" EntitySet="Responding Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responding Request_Responding Request" Association="Self.FK_Responding Request_Responding Request">
+            <End Role="User" EntitySet="User" />
+            <End Role="Responding Request" EntitySet="Responding Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responding Request_Sending Requests" Association="Self.FK_Responding Request_Sending Requests">
+            <End Role="Sending Requests" EntitySet="Sending Requests" />
+            <End Role="Responding Request" EntitySet="Responding Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sending Requests_User" Association="Self.FK_Sending Requests_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Sending Requests" EntitySet="Sending Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sending Requests_User1" Association="Self.FK_Sending Requests_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Sending Requests" EntitySet="Sending Requests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Job_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+          <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Asign_Projects" Relationship="Model.FK_Asign_Projects_User" FromRole="User" ToRole="Asign_Project" />
+          <NavigationProperty Name="Asign_Projects1" Relationship="Model.FK_Asign_Projects_User1" FromRole="User" ToRole="Asign_Project" />
+          <NavigationProperty Name="Comments" Relationship="Model.FK_Comments_User" FromRole="User" ToRole="Comment" />
+          <NavigationProperty Name="Give_Evluations" Relationship="Model.FK_Give_Evluations_User" FromRole="User" ToRole="Give_Evluation" />
+          <NavigationProperty Name="Give_Evluations1" Relationship="Model.FK_Give_Evluations_User1" FromRole="User" ToRole="Give_Evluation" />
+          <NavigationProperty Name="Give_Evluations2" Relationship="Model.FK_Give_Evluations_User2" FromRole="User" ToRole="Give_Evluation" />
+          <NavigationProperty Name="Give_Feedback" Relationship="Model.FK_Give_Feedback_Give_Feedback" FromRole="User" ToRole="Give_Feedback" />
+          <NavigationProperty Name="Give_Feedback1" Relationship="Model.FK_Give_Feedback_User" FromRole="User" ToRole="Give_Feedback" />
+          <NavigationProperty Name="Make_Reports" Relationship="Model.FK_Make_Reports_User" FromRole="User" ToRole="Make_Report" />
+          <NavigationProperty Name="Make_Reports1" Relationship="Model.FK_Make_Reports_User1" FromRole="User" ToRole="Make_Report" />
+          <NavigationProperty Name="Posts" Relationship="Model.FK_Posts_User" FromRole="User" ToRole="Post" />
+          <NavigationProperty Name="Projects" Relationship="Model.FK_Project_User" FromRole="User" ToRole="Project" />
+          <NavigationProperty Name="Responding_Posts" Relationship="Model.FK_Responding_Posts_User" FromRole="User" ToRole="Responding_Post" />
+          <NavigationProperty Name="Responding_Request" Relationship="Model.FK_Responding_Request_Responding_Request" FromRole="User" ToRole="Responding_Request" />
+          <NavigationProperty Name="Sending_Requests" Relationship="Model.FK_Sending_Requests_User" FromRole="User" ToRole="Sending_Request" />
+          <NavigationProperty Name="Sending_Requests1" Relationship="Model.FK_Sending_Requests_User1" FromRole="User" ToRole="Sending_Request" />
+        </EntityType>
+        <EntityContainer Name="Managment" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Asign_Projects" EntityType="Model.Asign_Project" />
+          <EntitySet Name="Comments" EntityType="Model.Comment" />
+          <EntitySet Name="Give_Evluations" EntityType="Model.Give_Evluation" />
+          <EntitySet Name="Give_Feedbacks" EntityType="Model.Give_Feedback" />
+          <EntitySet Name="Make_Reports" EntityType="Model.Make_Report" />
+          <EntitySet Name="Posts" EntityType="Model.Post" />
+          <EntitySet Name="Projects" EntityType="Model.Project" />
+          <EntitySet Name="Project_types" EntityType="Model.Project_type" />
+          <EntitySet Name="Responding_Posts" EntityType="Model.Responding_Post" />
+          <EntitySet Name="Responding_Requests" EntityType="Model.Responding_Request" />
+          <EntitySet Name="Sending_Requests" EntityType="Model.Sending_Request" />
+          <AssociationSet Name="FK_Asign_Projects_Asign_Projects" Association="Model.FK_Asign_Projects_Asign_Projects">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Asign_Project" EntitySet="Asign_Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asign_Projects_User" Association="Model.FK_Asign_Projects_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Asign_Project" EntitySet="Asign_Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asign_Projects_User1" Association="Model.FK_Asign_Projects_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Asign_Project" EntitySet="Asign_Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Posts" Association="Model.FK_Comments_Posts">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_User" Association="Model.FK_Comments_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give_Evluations_User" Association="Model.FK_Give_Evluations_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Give_Evluation" EntitySet="Give_Evluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give_Evluations_User1" Association="Model.FK_Give_Evluations_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Give_Evluation" EntitySet="Give_Evluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give_Evluations_User2" Association="Model.FK_Give_Evluations_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Give_Evluation" EntitySet="Give_Evluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give_Feedback_Give_Feedback" Association="Model.FK_Give_Feedback_Give_Feedback">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Give_Feedback" EntitySet="Give_Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Give_Feedback_User" Association="Model.FK_Give_Feedback_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Give_Feedback" EntitySet="Give_Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Make_Reports_User" Association="Model.FK_Make_Reports_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Make_Report" EntitySet="Make_Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Make_Reports_User1" Association="Model.FK_Make_Reports_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Make_Report" EntitySet="Make_Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_User" Association="Model.FK_Posts_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_Project" Association="Model.FK_Project_Project">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_type_Project" Association="Model.FK_Project_type_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Project_type" EntitySet="Project_types" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Project_User" Association="Model.FK_Project_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Project" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responding_Posts_User" Association="Model.FK_Responding_Posts_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Responding_Post" EntitySet="Responding_Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responding_Request_Responding_Request" Association="Model.FK_Responding_Request_Responding_Request">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Responding_Request" EntitySet="Responding_Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responding_Request_Sending_Requests" Association="Model.FK_Responding_Request_Sending_Requests">
+            <End Role="Sending_Request" EntitySet="Sending_Requests" />
+            <End Role="Responding_Request" EntitySet="Responding_Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sending_Requests_User" Association="Model.FK_Sending_Requests_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Sending_Request" EntitySet="Sending_Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sending_Requests_User1" Association="Model.FK_Sending_Requests_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Sending_Request" EntitySet="Sending_Requests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Asign_Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Manager_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="post_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="Model.FK_Asign_Projects_Asign_Projects" FromRole="Asign_Project" ToRole="Post" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Asign_Projects_User" FromRole="Asign_Project" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Model.FK_Asign_Projects_User1" FromRole="Asign_Project" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Manager_ID" Type="Int32" Nullable="false" />
+          <Property Name="Post_ID" Type="Int32" Nullable="false" />
+          <Property Name="Comment_Description" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Post" Relationship="Model.FK_Comments_Posts" FromRole="Comment" ToRole="Post" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Comments_User" FromRole="Comment" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Give_Evluation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Team_leader_ID" Type="Int32" Nullable="false" />
+          <Property Name="Project_Manager_ID" Type="Int32" Nullable="false" />
+          <Property Name="JES" Type="Int32" Nullable="false" />
+          <Property Name="Evaluations" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Give_Evluations_User" FromRole="Give_Evluation" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Model.FK_Give_Evluations_User1" FromRole="Give_Evluation" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="Model.FK_Give_Evluations_User2" FromRole="Give_Evluation" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Give_Feedback">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Team_Leader_ID" Type="Int32" Nullable="false" />
+          <Property Name="Project_Manager_ID" Type="Int32" Nullable="false" />
+          <Property Name="Feedback" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Give_Feedback_Give_Feedback" FromRole="Give_Feedback" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Model.FK_Give_Feedback_User" FromRole="Give_Feedback" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Make_Report">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Project_Manager_ID" Type="Int32" Nullable="false" />
+          <Property Name="Report" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Make_Reports_User" FromRole="Make_Report" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Model.FK_Make_Reports_User1" FromRole="Make_Report" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="post_Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Asign_Projects" Relationship="Model.FK_Asign_Projects_Asign_Projects" FromRole="Post" ToRole="Asign_Project" />
+          <NavigationProperty Name="Comments" Relationship="Model.FK_Comments_Posts" FromRole="Post" ToRole="Comment" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Posts_User" FromRole="Post" ToRole="User" />
+          <NavigationProperty Name="Projects" Relationship="Model.FK_Project_Project" FromRole="Post" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="POST_ID" Type="Int32" Nullable="false" />
+          <Property Name="Project_Manager_ID" Type="Int32" Nullable="false" />
+          <Property Name="Project_ype" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="Model.FK_Project_Project" FromRole="Project" ToRole="Post" />
+          <NavigationProperty Name="Project_type" Relationship="Model.FK_Project_type_Project" FromRole="Project" ToRole="Project_type" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Project_User" FromRole="Project" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Project_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_ID" Type="Int32" Nullable="false" />
+          <Property Name="Pro_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Model.FK_Project_type_Project" FromRole="Project_type" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Responding_Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post_ID" Type="Int32" Nullable="false" />
+          <Property Name="Admin_ID" Type="Int32" Nullable="false" />
+          <Property Name="post_stat" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Responding_Posts_User" FromRole="Responding_Post" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Responding_Request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Request_ID" Type="Int32" Nullable="false" />
+          <Property Name="Respond" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Responding_Request_Responding_Request" FromRole="Responding_Request" ToRole="User" />
+          <NavigationProperty Name="Sending_Requests" Relationship="Model.FK_Responding_Request_Sending_Requests" FromRole="Responding_Request" ToRole="Sending_Request" />
+        </EntityType>
+        <EntityType Name="Sending_Request">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sender_ID" Type="Int32" Nullable="false" />
+          <Property Name="Reciever_ID" Type="Int32" Nullable="false" />
+          <Property Name="Project_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Responding_Request" Relationship="Model.FK_Responding_Request_Sending_Requests" FromRole="Sending_Request" ToRole="Responding_Request" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Sending_Requests_User" FromRole="Sending_Request" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Model.FK_Sending_Requests_User1" FromRole="Sending_Request" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Asign_Projects_Asign_Projects">
+          <End Type="Model.Post" Role="Post" Multiplicity="1" />
+          <End Type="Model.Asign_Project" Role="Asign_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Asign_Project">
+              <PropertyRef Name="post_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asign_Projects_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Asign_Project" Role="Asign_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Asign_Project">
+              <PropertyRef Name="Project_Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asign_Projects_User1">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Asign_Project" Role="Asign_Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Asign_Project">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Posts">
+          <End Type="Model.Post" Role="Post" Multiplicity="1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="Post_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="Project_Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give_Evluations_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Give_Evluation" Role="Give_Evluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give_Evluation">
+              <PropertyRef Name="JES" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give_Evluations_User1">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Give_Evluation" Role="Give_Evluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give_Evluation">
+              <PropertyRef Name="Project_Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give_Evluations_User2">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Give_Evluation" Role="Give_Evluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give_Evluation">
+              <PropertyRef Name="Team_leader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give_Feedback_Give_Feedback">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Give_Feedback" Role="Give_Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give_Feedback">
+              <PropertyRef Name="Project_Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Give_Feedback_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Give_Feedback" Role="Give_Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Give_Feedback">
+              <PropertyRef Name="Team_Leader_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Make_Reports_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Make_Report" Role="Make_Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Make_Report">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Make_Reports_User1">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Make_Report" Role="Make_Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Make_Report">
+              <PropertyRef Name="Project_Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_Project">
+          <End Type="Model.Post" Role="Post" Multiplicity="1" />
+          <End Type="Model.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="POST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_type_Project">
+          <End Type="Model.Project" Role="Project" Multiplicity="1" />
+          <End Type="Model.Project_type" Role="Project_type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project_type">
+              <PropertyRef Name="Project_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Project_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="Project_Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responding_Posts_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Responding_Post" Role="Responding_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Responding_Post">
+              <PropertyRef Name="Admin_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responding_Request_Responding_Request">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Responding_Request" Role="Responding_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Responding_Request">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responding_Request_Sending_Requests">
+          <End Type="Model.Sending_Request" Role="Sending_Request" Multiplicity="1" />
+          <End Type="Model.Responding_Request" Role="Responding_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sending_Request">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Responding_Request">
+              <PropertyRef Name="Request_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sending_Requests_User">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Sending_Request" Role="Sending_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sending_Request">
+              <PropertyRef Name="Sender_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sending_Requests_User1">
+          <End Type="Model.User" Role="User" Multiplicity="1" />
+          <End Type="Model.Sending_Request" Role="Sending_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Sending_Request">
+              <PropertyRef Name="Reciever_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Managment">
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="User_Name" ColumnName="User Name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Job_Description" ColumnName="Job Description" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asign_Projects">
+            <EntityTypeMapping TypeName="Model.Asign_Project">
+              <MappingFragment StoreEntitySet="Asign Projects">
+                <ScalarProperty Name="post_ID" ColumnName="post ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User ID" />
+                <ScalarProperty Name="Project_Manager_ID" ColumnName="Project Manager ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="Model.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="Comment_Description" ColumnName="Comment Description" />
+                <ScalarProperty Name="Post_ID" ColumnName="Post ID" />
+                <ScalarProperty Name="Project_Manager_ID" ColumnName="Project Manager ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Give_Evluations">
+            <EntityTypeMapping TypeName="Model.Give_Evluation">
+              <MappingFragment StoreEntitySet="Give Evluations">
+                <ScalarProperty Name="Evaluations" ColumnName="Evaluations" />
+                <ScalarProperty Name="JES" ColumnName="JES" />
+                <ScalarProperty Name="Project_Manager_ID" ColumnName="Project Manager ID" />
+                <ScalarProperty Name="Team_leader_ID" ColumnName="Team leader ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Give_Feedbacks">
+            <EntityTypeMapping TypeName="Model.Give_Feedback">
+              <MappingFragment StoreEntitySet="Give Feedback">
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="Project_Manager_ID" ColumnName="Project Manager ID" />
+                <ScalarProperty Name="Team_Leader_ID" ColumnName="Team Leader ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Make_Reports">
+            <EntityTypeMapping TypeName="Model.Make_Report">
+              <MappingFragment StoreEntitySet="Make Reports">
+                <ScalarProperty Name="Report" ColumnName="Report" />
+                <ScalarProperty Name="Project_Manager_ID" ColumnName="Project Manager ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="Model.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="post_Description" ColumnName="post Description" />
+                <ScalarProperty Name="User_ID" ColumnName="User ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="Model.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="Project_ype" ColumnName="Project ype" />
+                <ScalarProperty Name="Project_Manager_ID" ColumnName="Project Manager ID" />
+                <ScalarProperty Name="POST_ID" ColumnName="POST ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_types">
+            <EntityTypeMapping TypeName="Model.Project_type">
+              <MappingFragment StoreEntitySet="Project type">
+                <ScalarProperty Name="Pro_type" ColumnName="Pro type" />
+                <ScalarProperty Name="Project_ID" ColumnName="Project ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responding_Posts">
+            <EntityTypeMapping TypeName="Model.Responding_Post">
+              <MappingFragment StoreEntitySet="Responding Posts">
+                <ScalarProperty Name="post_stat" ColumnName="post stat" />
+                <ScalarProperty Name="Admin_ID" ColumnName="Admin ID" />
+                <ScalarProperty Name="Post_ID" ColumnName="Post ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responding_Requests">
+            <EntityTypeMapping TypeName="Model.Responding_Request">
+              <MappingFragment StoreEntitySet="Responding Request">
+                <ScalarProperty Name="Respond" ColumnName="Respond" />
+                <ScalarProperty Name="Request_ID" ColumnName="Request ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sending_Requests">
+            <EntityTypeMapping TypeName="Model.Sending_Request">
+              <MappingFragment StoreEntitySet="Sending Requests">
+                <ScalarProperty Name="Project_ID" ColumnName="Project ID" />
+                <ScalarProperty Name="Reciever_ID" ColumnName="Reciever ID" />
+                <ScalarProperty Name="Sender_ID" ColumnName="Sender ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

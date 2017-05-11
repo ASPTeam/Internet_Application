@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e92a46fcc5104b3ab39b5764bf2f7d9c" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="6.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Asign_Project" Width="1.5" PointX="8.625" PointY="17.375" />
+        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="8.625" PointY="14.5" />
+        <EntityTypeShape EntityType="Model.Give_Evluation" Width="1.5" PointX="6.375" PointY="24.5" />
+        <EntityTypeShape EntityType="Model.Give_Feedback" Width="1.5" PointX="6.375" PointY="18.625" />
+        <EntityTypeShape EntityType="Model.Make_Report" Width="1.5" PointX="6.375" PointY="12.625" />
+        <EntityTypeShape EntityType="Model.Post" Width="1.5" PointX="6.375" PointY="27.75" />
+        <EntityTypeShape EntityType="Model.Project" Width="1.5" PointX="8.625" PointY="11.375" />
+        <EntityTypeShape EntityType="Model.Project_type" Width="1.5" PointX="10.875" PointY="11.625" />
+        <EntityTypeShape EntityType="Model.Responding_Post" Width="1.5" PointX="6.375" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.Responding_Request" Width="1.5" PointX="11.625" PointY="16" />
+        <EntityTypeShape EntityType="Model.Sending_Request" Width="1.5" PointX="6.375" PointY="30.875" />
+        <AssociationConnector Association="Model.FK_Asign_Projects_Asign_Projects" />
+        <AssociationConnector Association="Model.FK_Asign_Projects_User" />
+        <AssociationConnector Association="Model.FK_Asign_Projects_User1" />
+        <AssociationConnector Association="Model.FK_Comments_Posts" />
+        <AssociationConnector Association="Model.FK_Comments_User" />
+        <AssociationConnector Association="Model.FK_Give_Evluations_User" />
+        <AssociationConnector Association="Model.FK_Give_Evluations_User1" />
+        <AssociationConnector Association="Model.FK_Give_Evluations_User2" />
+        <AssociationConnector Association="Model.FK_Give_Feedback_Give_Feedback" />
+        <AssociationConnector Association="Model.FK_Give_Feedback_User" />
+        <AssociationConnector Association="Model.FK_Make_Reports_User" />
+        <AssociationConnector Association="Model.FK_Make_Reports_User1" />
+        <AssociationConnector Association="Model.FK_Posts_User" />
+        <AssociationConnector Association="Model.FK_Project_Project" />
+        <AssociationConnector Association="Model.FK_Project_type_Project" />
+        <AssociationConnector Association="Model.FK_Project_User" />
+        <AssociationConnector Association="Model.FK_Responding_Posts_User" />
+        <AssociationConnector Association="Model.FK_Responding_Request_Responding_Request" />
+        <AssociationConnector Association="Model.FK_Responding_Request_Sending_Requests" />
+        <AssociationConnector Association="Model.FK_Sending_Requests_User" />
+        <AssociationConnector Association="Model.FK_Sending_Requests_User1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -11,72 +11,74 @@ namespace Projects_Management_System.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web;
-    using System.Web.Mvc;
-   
-
+    
     public partial class User
     {
-       [Key]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Asign_Projects = new HashSet<Asign_Project>();
+            this.Asign_Projects1 = new HashSet<Asign_Project>();
+            this.Comments = new HashSet<Comment>();
+            this.Give_Evluations = new HashSet<Give_Evluation>();
+            this.Give_Evluations1 = new HashSet<Give_Evluation>();
+            this.Give_Evluations2 = new HashSet<Give_Evluation>();
+            this.Give_Feedback = new HashSet<Give_Feedback>();
+            this.Give_Feedback1 = new HashSet<Give_Feedback>();
+            this.Make_Reports = new HashSet<Make_Report>();
+            this.Make_Reports1 = new HashSet<Make_Report>();
+            this.Posts = new HashSet<Post>();
+            this.Projects = new HashSet<Project>();
+            this.Responding_Posts = new HashSet<Responding_Post>();
+            this.Responding_Request = new HashSet<Responding_Request>();
+            this.Sending_Requests = new HashSet<Sending_Request>();
+            this.Sending_Requests1 = new HashSet<Sending_Request>();
+        }
+    
         public int ID { get; set; }
-
-        [Required(ErrorMessage = "User name is required")]
-        [Display(Name = "User Name")]
         public string User_Name { get; set; }
-
-
-        [Required(ErrorMessage = "Password is required")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        [MinLength(6,ErrorMessage = "Password length must be at least 6 characters")]
         public string password { get; set; }
-
-        
-        [Required(ErrorMessage = "Email is required")]
-        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Enter a valid Email")]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-
         public byte[] Photo { get; set; }
-
-
-        [Required(ErrorMessage = "please upload your photo")]
-        [Display(Name = "Upload your photo")]
-
-        public HttpPostedFileBase File { get; set; }
-
-        [HiddenInput(DisplayValue = false)]
-        [Required(ErrorMessage = "Please enter the job Description")]
-        [Display(Name = "Job Description")]
         public string Job_Description { get; set; }
-
-
-        [Required(ErrorMessage = "First name is required")]
-        [Display(Name = "First Name")]
         public string First_Name { get; set; }
-
-
-        [Required(ErrorMessage = "Last name is required")]
-        [Display(Name = "Last Name")]
         public string Last_Name { get; set; }
-
-
-        [Required(ErrorMessage = "please enter a phone number ")]
-        [DataType(DataType.PhoneNumber)]
         public int Mobile { get; set; }
-
-        [Required(ErrorMessage = "please determine the new user privileges")]
-        [HiddenInput(DisplayValue = false)]
         public int Type { get; set; }
-
-
-        [Display(Name ="Confirm Password")]
-        [DataType(DataType.Password)]
-        [System.ComponentModel.DataAnnotations.Compare("password", ErrorMessage = "passwords doesn't match ")]
-        public string confirmpassword { get; set; }
-
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Asign_Project> Asign_Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Asign_Project> Asign_Projects1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Give_Evluation> Give_Evluations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Give_Evluation> Give_Evluations1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Give_Evluation> Give_Evluations2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Give_Feedback> Give_Feedback { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Give_Feedback> Give_Feedback1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Make_Report> Make_Reports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Make_Report> Make_Reports1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Post> Posts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Project> Projects { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Responding_Post> Responding_Posts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Responding_Request> Responding_Request { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sending_Request> Sending_Requests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sending_Request> Sending_Requests1 { get; set; }
     }
 }

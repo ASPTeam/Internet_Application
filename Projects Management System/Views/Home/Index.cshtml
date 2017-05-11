@@ -4,4 +4,13 @@
 }
 
 <h2>Index</h2>
+Welcome @HttpContext.Current.User.Identity.Name
+
+@if(Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "Home",FormMethod.Post,new { id ="logoutform"}))
+    {
+        <a href="javascript:document.getElementById('logoutform').submit()">Logout</a>
+    }
+}
 
