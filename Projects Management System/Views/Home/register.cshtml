@@ -4,20 +4,10 @@
     ViewBag.Title = "Registeration";
 }
 
-<div class="modal fade" id="register" role="dialog">
-    <div class="modal-dialog custom-class">
-      
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2>Register Now and Join US !!</h2>
-            </div>
-            <div class="modal-body">
+<h2>Register Now and Join US !!</h2>
 
-              
-
-                @if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
-                {
+@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+{
 
                     if (ViewBag.Message != null)
                     {
@@ -106,13 +96,13 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.Type, new SelectList(new[] { "Customer" }), new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Type, new SelectList(new[] { "1" }), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -131,49 +121,23 @@
                             </div>
                         </div>
 
-                        if (ViewBag.Message != null)
-                        {
-                            <div class="alert alert-danger">
-                                <strong>Error! </strong> @ViewBag.Message
-                            </div>
-                        }
-                    }
-                }
-
-
-
-
-                <div class="text-success">
-                    <strong>Already have an account ? @Html.ActionLink("Login", "login") Now</strong>
-                </div>
-                </div>
+        if (ViewBag.Message != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Error! </strong> @ViewBag.Message
             </div>
-        </div>
-    </div>
+        }
+    }
+}
 
-  @section scripts
+
+
+
+<div class="text-center text-success">
+    <strong>Already have an account ? @Html.ActionLink("Login", "login") Now</strong>
+</div>
+@section scripts
 {
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript">
-    $(window).on('load',function(){
-        $('#register').modal('show');
-    });
-    </script>
 }
-<style>
-    .modal-body {
-        width: 950px; /* either % (e.g. 60%) or px (400px) */
-    }
-
-    .modal-header, h4, .close {
-        background-color: #5cb85c;
-        color: white !important;
-        text-align: center;
-        font-size: 30px;
-    }
-
-    .modal-footer {
-        background-color: #f9f9f9;
-    }
-</style>
