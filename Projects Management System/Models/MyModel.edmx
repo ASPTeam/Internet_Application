@@ -115,8 +115,8 @@
           <Property Name="Job Description" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="First Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Last Name" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Mobile" Type="int" Nullable="false" />
-          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
           <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
@@ -486,8 +486,8 @@
           <Property Name="Job_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Mobile" Type="Int32" Nullable="false" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" />
           <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
           <Property Name="ActivationCode" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Asign_Projects" Relationship="Model.FK_Asign_Projects_User" FromRole="User" ToRole="Asign_Project" />

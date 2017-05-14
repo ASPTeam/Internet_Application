@@ -61,11 +61,11 @@ namespace Projects_Management_System.Models
 
         [Required(ErrorMessage = "please enter a phone number ")]
         [DataType(DataType.PhoneNumber)]
-        public int Mobile { get; set; }
+        public string Mobile { get; set; }
 
         [Display(Name = "Role")]
         [Required(ErrorMessage = "please determine the new user privileges")]
-        public int Type { get; set; }
+        public string Type { get; set; }
 
 
         [Display(Name = "Confirm Password")]

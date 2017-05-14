@@ -1,0 +1,101 @@
+﻿@model Projects_Management_System.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3 class="text-danger text-capitalize">You are about to delete @Html.DisplayFor(model => model.First_Name) @Html.DisplayFor(model => model.Last_Name) !</h3>
+<div>
+    <p class="text-capitalize active">@Html.DisplayFor(model => model.First_Name) @Html.DisplayFor(model => model.Last_Name) will be no longer able to acces the system 
+    and all his / her information will be lost forever.
+    
+    </p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+       
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Job_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.First_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Last_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            <a href="@Url.Action("Index", "Admin")" class="btn btn-success">
+                Cancel
+                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+            </a>
+        </div>
+    }
+</div>
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+

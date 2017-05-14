@@ -151,7 +151,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Areas\Customers\Views\Home\Index.cshtml" />
     <Content Include="images\rsz_project-management-1400x951-31.jpg" />
     <EntityDeploy Include="Models\MyModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -195,12 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Customers\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Customers\CustomersAreaRegistration.cs" />
-    <Compile Include="Areas\JEs\JEsAreaRegistration.cs" />
-    <Compile Include="Areas\PMs\PMsAreaRegistration.cs" />
-    <Compile Include="Areas\TLs\TLsAreaRegistration.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="crypto.cs" />
     <Compile Include="Global.asax.cs">
@@ -259,16 +253,12 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MyRoleProvider\SiteRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Customers\Views\web.config" />
-    <Content Include="Areas\PMs\Views\web.config" />
-    <Content Include="Areas\TLs\Views\web.config" />
-    <Content Include="Areas\JEs\Views\web.config" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
@@ -278,6 +268,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\register.cshtml" />
     <Content Include="Views\Home\login.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -287,19 +280,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Customers\Models\" />
-    <Folder Include="Areas\JEs\Controllers\" />
-    <Folder Include="Areas\JEs\Models\" />
-    <Folder Include="Areas\JEs\Views\Shared\" />
-    <Folder Include="Areas\PMs\Controllers\" />
-    <Folder Include="Areas\PMs\Models\" />
-    <Folder Include="Areas\PMs\Views\Shared\" />
-    <Folder Include="Areas\TLs\Controllers\" />
-    <Folder Include="Areas\TLs\Models\" />
-    <Folder Include="Areas\TLs\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

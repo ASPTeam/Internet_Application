@@ -43,8 +43,8 @@ namespace Projects_Management_System.Models
         public string Job_Description { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
-        public int Mobile { get; set; }
-        public int Type { get; set; }
+        public string Mobile { get; set; }
+        public string Type { get; set; }
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
     

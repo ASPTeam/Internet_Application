@@ -1,0 +1,264 @@
+﻿@model IEnumerable<Projects_Management_System.Models.User>
+
+@{
+    ViewBag.Title = "Projects Management";
+
+    byte[] photo = (byte[])Session["photo"];
+    var base64= Convert.ToBase64String(photo);
+    var img = string.Format("data:image/jpg;base64,{0}", base64);
+    var first = Session["First"];
+    var last = Session["Last"];
+    var mobile = Session["Mobile"];
+    var jop = Session["jop"];
+
+
+}
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutform" }))
+    {
+<nav class="navbar navbar-inverse ">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">ManagForyou.com</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home Page</a></li>
+                
+            </ul>
+          
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+               <li ><p class="navbar-text">Welcome @HttpContext.Current.User.Identity.Name</p></li>
+                      
+                        <li><a href="javascript:document.getElementById('logoutform').submit()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+    }
+}
+
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-sm-2 well table-responsive ">
+            <div class="well ">
+                <p>Profile Information</p>  
+                <img src="@img" class="img-responsive img-circle" />
+            </div>
+            
+          <table class="table table-condensed table-hover" >
+              <tr>
+                  <td  class="danger" >First Name</td>
+                  <td class="success"><strong>@first</strong></td>
+                 
+              </tr>
+              <tr>
+                  <td class="danger">Last Name </td>
+                  <td class="success"><strong>@last</strong></td>
+              </tr>
+              <tr>
+                  <td class="danger"> Job Description </td>
+                  <td class="success"><strong>@jop</strong></td>
+              </tr>
+              <tr>
+                  <td class="danger">Mobile  </td>
+                  <td class="success"><strong>@mobile</strong></td>
+              </tr>
+          </table>
+           
+           
+        </div>
+        <div class="col-sm-10">
+
+            <div class="row ">
+                <div class="col-sm-12">
+                     <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">All current System Actors</h3>
+                        </div>
+                        <div class="panel-body table-responsive " style="max-height:300px ;min-height:200px;overflow-y:scroll">
+                            <table class="table table-condensed table-bordered table-hover ">
+                                <tr class="danger text-capitalize">
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.User_Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.password)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Email)
+                                    </th>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Job_Description)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.First_Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Last_Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Mobile)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Type)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.IsEmailVerified)
+                                    </th>
+
+                                    <th>Operatin  Allowed </th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="success">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.User_Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.password)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Job_Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.First_Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Last_Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Mobile)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Type)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsEmailVerified)
+                                        </td>
+
+                                        <td>
+                                            @if (item.ID != (int)Session["id"])
+                                            {
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+
+                                            }
+                                            else
+                                            {
+                                                <p>Deletetion Disabled</p>
+                                            }
+
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </table>
+
+
+                        </div>
+                        <div class="panel-footer text-center">
+                            <p>
+                                <a href="@Url.Action("Create", "Admin")" class="btn btn-primary">
+                                    Create New Actor
+                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                </a>
+
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <p>John</p>
+                        <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="well">
+                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <p>Bo</p>
+                        <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="well">
+                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <p>Jane</p>
+                        <img src="bandmember.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="well">
+                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <p>Anja</p>
+                        <img src="bird.jpg" class="img-circle" height="55" width="55" alt="Avatar">
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="well">
+                        <p>Just Forgot that I had to mention something about someone to someone about how I forgot something, but now I forgot it. Ahh, forget it! Or wait. I remember.... no I don't.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        
+    </div>
+  
+</div>
+<nav class="navbar navbar-inverse text-center text-capitalize" style="padding-top:100px;padding-bottom:100px">
+    <div class="container-fluid " style="color:gainsboro">
+
+        <p><span class="glyphicon glyphicon-map-marker"></span> Faculty of computer science,Helwan</p>
+        <p><span class="glyphicon glyphicon-earphone"></span> 01019190224</p>
+        <a href="https://github.com/ASPTeam/Internet_Application"> <span class="glyphicon glyphicon-envelope"></span> GITHUB.com</a>
+        <br /><br />
+        <p>all rights reserved @DateTime.Now.Year &copy; </p>
+    </div>
+
+</nav>
+
+
+  @section scripts
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

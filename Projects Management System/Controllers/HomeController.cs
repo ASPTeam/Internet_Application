@@ -7,18 +7,22 @@ using System.Web.Security;
 using Projects_Management_System.Models;
 using System.Net.Mail;
 using System.Net;
+using System.Security.Authentication;
+using Projects_Management_System.MyRoleProvider;
 
 namespace Projects_Management_System.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+        [Authorize(Roles ="Customer,Admin")]
         public ActionResult Index()
         {
+              
             return View();
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult register()
         {
 
@@ -70,11 +74,12 @@ namespace Projects_Management_System.Controllers
                     db.Users.Add(user);
                     db.SaveChanges();
                     sendverficationlink(user.Email, user.ActivationCode.ToString());
-                    message = "Registeraton successfully done ! we have sent an activation link sent to your Email " + user.Email;
+                    message = "Registeraton successfully done !we have sent an activation link to your Email " + user.Email;
                     Status = true;
                 }
-                #endregion    
                 
+                #endregion
+
             }
 
             else
@@ -112,21 +117,27 @@ namespace Projects_Management_System.Controllers
         [HttpGet]
         public ActionResult login()
         {
-            return View();
+            if (Session["First"] == null)
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Index","Home");
+           
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult login(login user,string Retunurl)
+        public ActionResult login(login user, string Retunurl)
         {
-           
+
             using (Managment db = new Managment())
             {
                 var v = db.Users.Where(a => a.Email == user.Email).FirstOrDefault();
-              
-                if (v!=null)
+
+                if (v != null)
                 {
-                    if(string.Compare(crypto.Hash(user.password),v.password)==0)
+                    if (string.Compare(crypto.Hash(user.password), v.password) == 0)
                     {
                         int timeout = user.RememberMe ? 525600 : 10;
                         var tickt = new FormsAuthenticationTicket(user.Email, user.RememberMe, timeout);
@@ -134,6 +145,13 @@ namespace Projects_Management_System.Controllers
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypting);
                         cookie.Expires = DateTime.Now.AddMinutes(timeout);
                         Response.Cookies.Add(cookie);
+                        Session["First"] = v.First_Name;
+                        Session["Last"] = v.Last_Name;
+                        Session["Mobile"] = v.Mobile;
+                        Session["jop"] = v.Job_Description;
+                        Session["photo"] = v.Photo;
+                        Session["id"] = v.ID;
+                       
 
                         if (Url.IsLocalUrl(Retunurl))
                         {
@@ -142,7 +160,14 @@ namespace Projects_Management_System.Controllers
                         }
                         else
                         {
+                            
+                           
+                           if (v.Type=="Admin")
+                            return RedirectToAction("Index", "Admin");
+                           else if (v.Type=="Customer")
                             return RedirectToAction("Index", "Home");
+
+
                         }
                     }
                     else
@@ -158,7 +183,7 @@ namespace Projects_Management_System.Controllers
                 }
             }
 
-         
+
             return View();
         }
 
@@ -167,6 +192,7 @@ namespace Projects_Management_System.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            Session.Clear();
             return RedirectToAction("login", "Home");
 
         }
