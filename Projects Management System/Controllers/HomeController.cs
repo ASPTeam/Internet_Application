@@ -17,12 +17,25 @@ namespace Projects_Management_System.Controllers
         [Authorize(Roles ="Customer,Admin")]
         public ActionResult Index()
         {
-           
-            return View();
+            List<object> mylsit = new List<object>();
+
+            Managment db = new Managment();
+            
+
+                var result = from y in db.Posts
+                             where (
+                                         from x in db.Responding_Posts
+
+                                         select x.Post_ID
+                                     ).Contains(y.ID)
+                             select y;
+                mylsit.Add(result.ToList());
+            
+            
+
+                return View(mylsit);
         }
 
-       
-          
       
 
         [HttpGet]
@@ -202,6 +215,13 @@ namespace Projects_Management_System.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult PostNewProject()
+        {
+
+            return View();
+        }
+
         [HttpPost]
        // [ValidateAntiForgeryToken]
         public ActionResult PostNewProject(Post post )
@@ -214,7 +234,7 @@ namespace Projects_Management_System.Controllers
                 if((string)role !="Customer")
                 {
                     ModelState.AddModelError("Not Allowd", "You are not allowed to post a project");
-                    return View("~/Views/Home/Index.cshtml");
+                    return View();
                 }
                 else
                     using (Managment db = new Managment())

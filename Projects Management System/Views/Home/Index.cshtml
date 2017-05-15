@@ -1,8 +1,8 @@
-﻿@model Projects_Management_System.Models.Post
+﻿@model IEnumerable<object>
 
 @{
     ViewBag.Title = "Projects Management";
-
+    List<Projects_Management_System.Models.Post> list = Model.ToList()[0] as List<Projects_Management_System.Models.Post>;
     byte[] photo = (byte[])Session["photo"];
     var base64 = Convert.ToBase64String(photo);
     var img = string.Format("data:image/jpg;base64,{0}", base64);
@@ -65,44 +65,57 @@
     <div class="row">
         <div class="col-lg-4 col-md-6 well text-center">
             <h4 class="text-center text-success">Post A New Project Now ! </h4>
-               
-                  
-                    
-@using (Html.BeginForm("PostNewProject", "Home",FormMethod.Post))
-{
-    Html.AntiForgeryToken();
-
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.TextAreaFor(model => model.post_Description, new { htmlAttributes = new { @class = "form-control" }})
-            @Html.ValidationMessageFor(model => model.post_Description, "", new { @class = "text-danger"})
-            @Html.ValidationMessage("Not Allowd", new { @class = "text-danger" })
+           
+            <a href="@Url.Action("PostNewProject", "Home")" class="btn btn-success btn-lg">Post<span class="glyphicon glyphicon-pencil"></span></a>
         </div>
-        <button type="submit" value="PostNewProject" class="btn btn-success btn btn-sm"><span class="glyphicon glyphicon-pencil"></span> Post</button>
 
-        </div>
-}
-                
-            </div>
-   
         <div class="col-lg-8 col-md-6">
             <div class="mainContent">
-                <div class="panel panel-info">
+                <div class="panel panel-info"  style="max-height:500px ;min-height:500px;overflow-y:scroll">
                     <div class="panel-heading">
-       <h3 class="panel-title">All Current Not Assigned Projects That Was <strong>Approved</strong> by system Admin</h3>
+                        <h3 class="panel-title">All Current Not Assigned Projects That Was <strong>Approved</strong> by system Admin</h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body table-responsive">
+                        <table class="table table-condensed table-bordered table-hover">
+                            <tr class="danger text-capitalize">
+
+
+                                <th>
+                                    Posts Description
+                                </th>
+                                <th>
+                                    Posted By
+                                </th>
+                                
+                            </tr>
+                            @foreach (var item in list)
+                            {
+                                <tr class="success ">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.post_Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.User.User_Name)
+                                    </td>
+                                 
+
+
+                                </tr>
+                            }
+                        </table>
+
 
                     </div>
-                    <div class="panel-footer">
-
-                    </div>
+                   
                 </div>
             </div>
         </div>
+            </div>
+   
+       
     </div>
-</div>
+
+
 
    
 @section scripts

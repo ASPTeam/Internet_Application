@@ -83,11 +83,19 @@
 
             <div class="row ">
                 <div class="col-sm-12">
-                     <div class="panel panel-success">
+                     <div class="panel panel-success"style="max-height:500px ;min-height:500px;overflow-y:scroll">
                         <div class="panel-heading">
                             <h3 class="panel-title">All current System Actors</h3>
+                            <br />
+                            <p>
+                                <a href="@Url.Action("Create", "Admin")" class="btn btn-primary">
+                                    Create New Actor
+                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                </a>
+
+                            </p>
                         </div>
-                        <div class="panel-body table-responsive " style="max-height:200px ;min-height:200px;overflow-y:scroll">
+                        <div class="panel-body table-responsive " >
                             <table class="table table-condensed table-bordered table-hover ">
                       <tr class="danger text-capitalize">
 
@@ -95,9 +103,7 @@
          <th>
              User Name 
           </th>
-          <th>
-              Password
-          </th>
+         
           <th>
               Email
           </th>
@@ -131,9 +137,7 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.User_Name)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.password)
-                                        </td>
+                                       
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Email)
                                         </td>
@@ -178,15 +182,9 @@
 
 
                         </div>
-                        <div class="panel-footer text-center">
-                            <p>
-                                <a href="@Url.Action("Create", "Admin")" class="btn btn-primary">
-                                    Create New Actor
-                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                                </a>
-
-                            </p>
-                        </div>
+                      
+                         
+                        
                     </div>
 
                 </div>
@@ -195,11 +193,11 @@
             <div class="row">
                 
                 <div class="col-sm-12">
-                    <div class="panel panel-success">
+                    <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll">
                         <div class="panel-heading">
                             <h3 class="panel-title">All current Pending Posts </h3>
                         </div>
-                        <div class="panel-body table-responsive" style="max-height:200px ;min-height:200px;overflow-y:scroll" >
+                        <div class="panel-body table-responsive"  >
                             <table class="table table-condensed table-bordered table-hover">
                                 <tr class="danger text-capitalize">
 
