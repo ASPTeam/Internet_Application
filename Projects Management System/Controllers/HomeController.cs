@@ -17,9 +17,13 @@ namespace Projects_Management_System.Controllers
         [Authorize(Roles ="Customer,Admin")]
         public ActionResult Index()
         {
-              
+           
             return View();
         }
+
+       
+          
+      
 
         [HttpGet]
         [AllowAnonymous]
@@ -151,6 +155,7 @@ namespace Projects_Management_System.Controllers
                         Session["jop"] = v.Job_Description;
                         Session["photo"] = v.Photo;
                         Session["id"] = v.ID;
+                        Session["Role"] = v.Type;
                        
 
                         if (Url.IsLocalUrl(Retunurl))
@@ -196,8 +201,34 @@ namespace Projects_Management_System.Controllers
             return RedirectToAction("login", "Home");
 
         }
-       
-        
+
+        [HttpPost]
+       // [ValidateAntiForgeryToken]
+        public ActionResult PostNewProject(Post post )
+        {
+            var role = Session["Role"];
+            var id = Session["id"];
+            post.User_ID = (int)id;
+            if(ModelState.IsValid)
+            {
+                if((string)role !="Customer")
+                {
+                    ModelState.AddModelError("Not Allowd", "You are not allowed to post a project");
+                    return View("~/Views/Home/Index.cshtml");
+                }
+                else
+                    using (Managment db = new Managment())
+                    {
+                        db.Posts.Add(post);
+                        db.SaveChanges();
+                    }
+            
+                
+            }
+            return RedirectToAction("Index", "Home");
+
+
+        }
         [NonAction]
         public bool  ISemailExisit(string EmailID )
         {

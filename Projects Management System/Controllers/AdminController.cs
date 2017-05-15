@@ -16,12 +16,24 @@ namespace Projects_Management_System.Controllers
     {
         private Managment db = new Managment();
 
-       
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
-        }
+            List<object> mymodel = new List<object>();
+            mymodel.Add(db.Users.ToList());
+         var result=   from y in db.Posts
+            where !(
+                        from x in db.Responding_Posts
+                       
+                        select x.Post_ID
+                    ).Contains(y.ID)
+            select y;
+            mymodel.Add(result.ToList());
 
+          
+            return View(mymodel);
+        }
+       
+     
        
         public ActionResult Create()
         {
@@ -121,6 +133,35 @@ namespace Projects_Management_System.Controllers
              
 
                 return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+       public ActionResult Approveposts(int postid ,Responding_Post respond )
+        {
+            var adminid = Session["id"];
+            respond.Admin_ID = (int)adminid;
+            respond.Post_ID = postid;
+            respond.post_stat = true;
+            if(ModelState.IsValid)
+            {
+                db.Responding_Posts.Add(respond);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "Admin");
+
+        }
+
+
+        [HttpPost]
+       public ActionResult Deleteposts(int postid)
+        {
+            Post post = db.Posts.Find(postid);
+            db.Posts.Remove(post);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Admin");
         }
 
         protected override void Dispose(bool disposing)

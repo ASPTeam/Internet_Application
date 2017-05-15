@@ -1,16 +1,112 @@
-﻿
+﻿@model Projects_Management_System.Models.Post
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Projects Management";
+
+    byte[] photo = (byte[])Session["photo"];
+    var base64 = Convert.ToBase64String(photo);
+    var img = string.Format("data:image/jpg;base64,{0}", base64);
+    var first = Session["First"];
+    var last = Session["Last"];
+    var mobile = Session["Mobile"];
+    var jop = Session["jop"];
+    var role = Session["Role"];
+
 }
-
-<h2>Index</h2>
-
-
-@if(Request.IsAuthenticated)
+@if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("Logout", "Home",FormMethod.Post,new { id ="logoutform"}))
+    using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutform" }))
     {
-        <a href="javascript:document.getElementById('logoutform').submit()">Logout</a>
+        <nav class="navbar navbar-inverse ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Manageitforyou.com</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active">@Html.ActionLink("Home","Index","Home")</li>
+                    </ul>
+                    @if ((string)role == "Admin")
+                    {
+                        <a href="@Url.Action("Index", "Admin")" class="btn btn-primary"> My profile<span class="glyphicon glyphicon-user"></span></a>
+
+                    }
+                    else if ((string)role == "Customer")
+                    {
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary"> My profile<span class="glyphicon glyphicon-user"></span></a>
+
+                    }
+                    <ul class="nav navbar-nav navbar-right">
+                       
+
+                        <li ><p class="navbar-text ">@HttpContext.Current.User.Identity.Name</p></li>
+
+                        <li><a href="javascript:document.getElementById('logoutform').submit()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
     }
 }
+<div class="container">
+    <div class="jumbotron">
+        <h1>Experts at making your work easy</h1>
+        <p>manage,simplfy and meke it simpler for you   <span class="glyphicon glyphicon-ok btn-success"></span> </p>
+        <p>just write your project description and get started   <span class="glyphicon glyphicon-ok btn-success"></span> </p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 well text-center">
+            <h4 class="text-center text-success">Post A New Project Now ! </h4>
+               
+                  
+                    
+@using (Html.BeginForm("PostNewProject", "Home",FormMethod.Post))
+{
+    Html.AntiForgeryToken();
 
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(model => model.post_Description, new { htmlAttributes = new { @class = "form-control" }})
+            @Html.ValidationMessageFor(model => model.post_Description, "", new { @class = "text-danger"})
+            @Html.ValidationMessage("Not Allowd", new { @class = "text-danger" })
+        </div>
+        <button type="submit" value="PostNewProject" class="btn btn-success btn btn-sm"><span class="glyphicon glyphicon-pencil"></span> Post</button>
+
+        </div>
+}
+                
+            </div>
+   
+        <div class="col-lg-8 col-md-6">
+            <div class="mainContent">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+       <h3 class="panel-title">All Current Not Assigned Projects That Was <strong>Approved</strong> by system Admin</h3>
+                    </div>
+                    <div class="panel-body">
+
+                    </div>
+                    <div class="panel-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+   
+@section scripts
+{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
