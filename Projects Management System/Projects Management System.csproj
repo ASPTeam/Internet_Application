@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PMController.cs" />
     <Compile Include="crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -238,9 +239,6 @@
     <Compile Include="Models\Project.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Project_type.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Responding_Post.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -272,6 +270,8 @@
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Home\PostNewProject.cshtml" />
+    <Content Include="Views\PM\Index.cshtml" />
+    <Content Include="Views\PM\SetStatus.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

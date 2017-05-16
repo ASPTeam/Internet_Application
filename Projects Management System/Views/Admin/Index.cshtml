@@ -2,12 +2,12 @@
 
 
 @{
-    ViewBag.Title = "Projects Management";
+    ViewBag.Title = "Admin Profile";
     List<Projects_Management_System.Models.User> listusers = Model.ToList()[0] as List<Projects_Management_System.Models.User>;
     List<Projects_Management_System.Models.Post> listposts = Model.ToList()[1] as List<Projects_Management_System.Models.Post>;
 
     byte[] photo = (byte[])Session["photo"];
-    var base64= Convert.ToBase64String(photo);
+    var base64 = Convert.ToBase64String(photo);
     var img = string.Format("data:image/jpg;base64,{0}", base64);
     var first = Session["First"];
     var last = Session["Last"];
@@ -20,256 +20,260 @@
 {
     using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutform" }))
     {
-<nav class="navbar navbar-inverse ">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Manageitforyou.com</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                
-            </ul>
-            <a href="@Url.Action("Index", "Admin")" class="btn btn-primary">My profile<span class="glyphicon glyphicon-user"></span></a>
+        <nav class="navbar navbar-inverse ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Manageitforyou.com</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
 
-            <ul class="nav navbar-nav navbar-right">
-               
-               <li ><p class="navbar-text">@HttpContext.Current.User.Identity.Name</p></li>
-                      
-               <li><a href="javascript:document.getElementById('logoutform').submit()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-            
-            </ul>
-        </div>
-    </div>
-</nav>
+                    </ul>
+                    <a href="@Url.Action("Index", "Admin")" class="btn btn-primary">My profile<span class="glyphicon glyphicon-user"></span></a>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><p class="navbar-text">@HttpContext.Current.User.Identity.Name</p></li>
+
+                        <li><a href="javascript:document.getElementById('logoutform').submit()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
     }
 
 
-<div class="container-fluid text-center">
-    <div class="row">
-        <div class="col-sm-2 well table-responsive ">
-            <div class="well ">
-                <p>Profile Information</p>  
-                <img src="@img" class="img-responsive img-circle" />
+    <div class="container-fluid text-center">
+        <div class="row">
+            <div class="col-sm-2 well table-responsive ">
+                <div class="well ">
+                    <p>Profile Information</p>
+                    <img src="@img" class="img-responsive img-circle" />
+                </div>
+
+                <table class="table table-condensed table-hover">
+                    <tr>
+                        <td class="danger">First Name</td>
+                        <td class="success"><strong>@first</strong></td>
+
+                    </tr>
+                    <tr>
+                        <td class="danger">Last Name </td>
+                        <td class="success"><strong>@last</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="danger"> Job Description </td>
+                        <td class="success"><strong>@jop</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="danger">Mobile  </td>
+                        <td class="success"><strong>@mobile</strong></td>
+                    </tr>
+                </table>
+
             </div>
-              
-          <table class="table table-condensed table-hover" >
-              <tr>
-                  <td  class="danger" >First Name</td>
-                  <td class="success"><strong>@first</strong></td>
-                 
-              </tr>
-              <tr>
-                  <td class="danger">Last Name </td>
-                  <td class="success"><strong>@last</strong></td>
-              </tr>
-              <tr>
-                  <td class="danger"> Job Description </td>
-                  <td class="success"><strong>@jop</strong></td>
-              </tr>
-              <tr>
-                  <td class="danger">Mobile  </td>
-                  <td class="success"><strong>@mobile</strong></td>
-              </tr>
-          </table>
-       
-        </div>
-        <div class="col-md-10">
+            <div class="col-md-10">
 
-            <div class="row ">
-                <div class="col-sm-12">
-                     <div class="panel panel-success"style="max-height:500px ;min-height:500px;overflow-y:scroll">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">All current System Actors</h3>
-                            <br />
-                            <p>
-                                <a href="@Url.Action("Create", "Admin")" class="btn btn-primary">
-                                    Create New Actor
-                                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                                </a>
+                <div class="row ">
+                    <div class="col-sm-12">
+                        <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">All current System Actors</h3>
+                                <br />
+                                <p>
+                                    <a href="@Url.Action("Create", "Admin")" class="btn btn-primary">
+                                        Create New Actor
+                                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                                    </a>
 
-                            </p>
+                                </p>
+                            </div>
+                            <div class="panel-body table-responsive ">
+                                <table class="table table-condensed table-bordered table-hover ">
+                                    <tr class="danger text-capitalize">
+
+
+                                        <th>
+                                            User Name
+                                        </th>
+
+                                        <th>
+                                            Email
+                                        </th>
+
+                                        <th>
+                                            Jop
+                                        </th>
+                                        <th>
+                                            First Name
+                                        </th>
+                                        <th>
+                                            Last Nmae
+                                        </th>
+                                        <th>
+                                            Mobile
+                                        </th>
+                                        <th>
+                                            Role
+                                        </th>
+                                        <th>
+                                            IsEmailVerified
+                                        </th>
+
+                                        <th>Operations  Allowed </th>
+                                    </tr>
+
+
+                                    @foreach (var item in listusers)
+                                    {
+                                        <tr class="success">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User_Name)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Job_Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.First_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Last_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Mobile)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Type)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IsEmailVerified)
+                                            </td>
+
+                                            <td>
+                                                @if (item.ID != (int)Session["id"])
+                                                {
+                                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+
+                                                }
+                                                else
+                                                {
+                                                    <p>Disabled</p>
+                                                }
+
+
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </table>
+
+
+                            </div>
+
+
+
                         </div>
-                        <div class="panel-body table-responsive " >
-                            <table class="table table-condensed table-bordered table-hover ">
-                      <tr class="danger text-capitalize">
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">All current Pending Posts </h3>
+                            </div>
+                            <div class="panel-body table-responsive">
+                                <table class="table table-condensed table-bordered table-hover">
+                                    <tr class="danger text-capitalize">
 
 
-         <th>
-             User Name 
-          </th>
-         
-          <th>
-              Email
-          </th>
+                                        <th>
+                                            Posts Description
+                                        </th>
+                                        <th>
+                                            Posted By
+                                        </th>
+                                        <th>
+                                           Approve
+                                        </th>
+                                        <th>
+                                           Delete
+                                        </th>
 
-          <th>
-              Jop
-          </th>
-          <th>
-              First Name 
-          </th>
-          <th>
-             Last Nmae 
-          </th>
-          <th>
-            Mobile 
-          </th>
-          <th>
-            Role
-          </th>
-          <th>
-              IsEmailVerified
-          </th>
-
-          <th>Operations  Allowed </th>
-      </tr>
-
-                                
-                                @foreach (var item in listusers)
-                                {
-                                    <tr class="success">
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.User_Name)
-                                        </td>
-                                       
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Job_Description)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.First_Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Last_Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Mobile)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Type)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.IsEmailVerified)
-                                        </td>
-
-                                        <td>
-                                            @if (item.ID != (int)Session["id"])
-                                            {
-                                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-
-                                            }
-                                            else
-                                            {
-                                                <p>Disabled</p>
-                                            }
-
-
-                                        </td>
 
                                     </tr>
-                                }
+                                    @foreach (var item in listposts)
+                                    {
+                                        <tr class="success ">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.post_Description)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User.User_Name)
+                                            </td>
+                                            <td>
+                                                
+                                                    @using (Html.BeginForm("Approveposts", "Admin", new { postid = @item.ID }, FormMethod.Post))
+                                                    {
+                                                        Html.AntiForgeryToken();
 
-                            </table>
+
+                                                    <button type="submit" value="Approveposts" class="btn btn-success btn btn-sm"><span class="glyphicon glyphicon-plus-sign"></span>Approve</button>
+
+                                                    }
+
+                                                </td>
+                                            <td>
+                                                    @using (Html.BeginForm("Deleteposts", "Admin", new { postid = @item.ID }, FormMethod.Post))
+                                                    {
+                                                        Html.AntiForgeryToken();
 
 
+                                                    <button type="submit" value="Deleteposts" class="btn btn-danger btn btn-sm"><span class="glyphicon glyphicon-remove"></span>Delete</button>
+                                                    }
+                                                </td>
+
+
+                                               
+
+                                           
+
+
+
+                                        </tr>
+                                    }
+                                </table>
+
+                            </div>
                         </div>
-                      
-                         
-                        
                     </div>
 
                 </div>
+
+
             </div>
 
-            <div class="row">
-                
-                <div class="col-sm-12">
-                    <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">All current Pending Posts </h3>
-                        </div>
-                        <div class="panel-body table-responsive"  >
-                            <table class="table table-condensed table-bordered table-hover">
-                                <tr class="danger text-capitalize">
-
-
-                                    <th>
-                                       Posts Description
-                                    </th>
-                                    <th>
-                                       Posted By
-                                    </th>
-                                    <th>
-                                       Operations Allowed 
-                                    </th>
-                                  
-                              
-                                </tr>
-                                @foreach (var item in listposts)
-                                {
-                                    <tr class="success ">
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.post_Description)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.User.User_Name)
-                                        </td>
-                                        <td >
-                                           <div class="btn-group" >
-                                                @using (Html.BeginForm("Approveposts", "Admin", new { postid = @item.ID }, FormMethod.Post))
-                                                {
-                                                    Html.AntiForgeryToken();
-
-                                                  
-                                                        <button type="submit" value="Approveposts" class="btn btn-success btn btn-sm"><span class="glyphicon glyphicon-plus-sign"></span>Approve</button>
-                                                       
-                                                        }
-
-
-                                                        @using (Html.BeginForm("Deleteposts", "Admin", new { postid = @item.ID }, FormMethod.Post))
-                                                        {
-                                                            Html.AntiForgeryToken();
-
-                                                          
-                                                                <button type="submit" value="Deleteposts" class="btn btn-danger btn btn-sm"><span class="glyphicon glyphicon-remove"></span>Delete</button>
-                                                               
-
-                                                                }
-
-                                               </div>
-
-</td>
-
-
-
-                                    </tr>
-                                }
-                                </table>
-
-</div>
-                    </div>
-            </div>
-          
         </div>
-       
-        
-    </div>
-  
-</div>
     </div>
 
 
 }
-  @section scripts
+@section scripts
 {
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

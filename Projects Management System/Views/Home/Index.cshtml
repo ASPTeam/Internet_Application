@@ -41,6 +41,11 @@
                         <a href="@Url.Action("Index", "Home")" class="btn btn-primary"> My profile<span class="glyphicon glyphicon-user"></span></a>
 
                     }
+                    else if ((string)role == "PM")
+                    {
+                        <a href="@Url.Action("Index", "PM")" class="btn btn-primary"> My profile<span class="glyphicon glyphicon-user"></span></a>
+
+                    }
                     <ul class="nav navbar-nav navbar-right">
                        
 
@@ -98,7 +103,22 @@
                                         @Html.DisplayFor(modelItem => item.User.User_Name)
                                     </td>
                                  
+                                    @if((string)role=="PM")
+                                    {
+                                        <td>
 
+
+
+
+
+
+
+
+                                        </td>
+
+
+
+                                    }
 
                                 </tr>
                             }

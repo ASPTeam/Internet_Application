@@ -23,15 +23,14 @@ namespace Projects_Management_System.Models
             this.Projects = new HashSet<Project>();
         }
 
-
         [Key]
         public int ID { get; set; }
         public int User_ID { get; set; }
-        [Required(ErrorMessage ="YOU Can not post an Empty Project")]
+        [Required(ErrorMessage = "YOU Can not post an Empty Project")]
         [DataType(DataType.MultilineText)]
-        [Display(Name ="Post Details")]
+        [Display(Name = "Post Details")]
         public string post_Description { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asign_Project> Asign_Projects { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

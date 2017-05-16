@@ -66,15 +66,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="POST ID" Type="int" Nullable="false" />
           <Property Name="Project Manager ID" Type="int" Nullable="false" />
-          <Property Name="Project ype" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Project type">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Project ID" Type="int" Nullable="false" />
-          <Property Name="Pro type" Type="int" Nullable="false" />
+          <Property Name="stat" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Responding Posts">
           <Key>
@@ -276,18 +268,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Project type_Project">
-          <End Role="Project" Type="Self.Project" Multiplicity="1" />
-          <End Role="Project type" Type="Self.Project type" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Project type">
-              <PropertyRef Name="Project ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Project_Project">
           <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
           <End Role="Project" Type="Self.Project" Multiplicity="*" />
@@ -380,7 +360,6 @@
           <EntitySet Name="Make Reports" EntityType="Self.Make Reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Posts" EntityType="Self.Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project type" EntityType="Self.Project type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responding Posts" EntityType="Self.Responding Posts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responding Request" EntityType="Self.Responding Request" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sending Requests" EntityType="Self.Sending Requests" Schema="dbo" store:Type="Tables" />
@@ -437,10 +416,6 @@
             <End Role="User" EntitySet="User" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
-          <AssociationSet Name="FK_Project type_Project" Association="Self.FK_Project type_Project">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="Project type" EntitySet="Project type" />
-          </AssociationSet>
           <AssociationSet Name="FK_Project_Project" Association="Self.FK_Project_Project">
             <End Role="Posts" EntitySet="Posts" />
             <End Role="Project" EntitySet="Project" />
@@ -486,8 +461,8 @@
           <Property Name="Job_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Mobile" Type="String" Nullable="false" />
-          <Property Name="Type" Type="String" Nullable="false" />
+          <Property Name="Mobile" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
           <Property Name="ActivationCode" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Asign_Projects" Relationship="Model.FK_Asign_Projects_User" FromRole="User" ToRole="Asign_Project" />
@@ -516,7 +491,6 @@
           <EntitySet Name="Make_Reports" EntityType="Model.Make_Report" />
           <EntitySet Name="Posts" EntityType="Model.Post" />
           <EntitySet Name="Projects" EntityType="Model.Project" />
-          <EntitySet Name="Project_types" EntityType="Model.Project_type" />
           <EntitySet Name="Responding_Posts" EntityType="Model.Responding_Post" />
           <EntitySet Name="Responding_Requests" EntityType="Model.Responding_Request" />
           <EntitySet Name="Sending_Requests" EntityType="Model.Sending_Request" />
@@ -575,10 +549,6 @@
           <AssociationSet Name="FK_Project_Project" Association="Model.FK_Project_Project">
             <End Role="Post" EntitySet="Posts" />
             <End Role="Project" EntitySet="Projects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Project_type_Project" Association="Model.FK_Project_type_Project">
-            <End Role="Project" EntitySet="Projects" />
-            <End Role="Project_type" EntitySet="Project_types" />
           </AssociationSet>
           <AssociationSet Name="FK_Project_User" Association="Model.FK_Project_User">
             <End Role="User" EntitySet="Users" />
@@ -682,19 +652,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="POST_ID" Type="Int32" Nullable="false" />
           <Property Name="Project_Manager_ID" Type="Int32" Nullable="false" />
-          <Property Name="Project_ype" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Post" Relationship="Model.FK_Project_Project" FromRole="Project" ToRole="Post" />
-          <NavigationProperty Name="Project_type" Relationship="Model.FK_Project_type_Project" FromRole="Project" ToRole="Project_type" />
           <NavigationProperty Name="User" Relationship="Model.FK_Project_User" FromRole="Project" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Project_type">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Project_ID" Type="Int32" Nullable="false" />
-          <Property Name="Pro_type" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Project" Relationship="Model.FK_Project_type_Project" FromRole="Project_type" ToRole="Project" />
+          <Property Name="stat" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Responding_Post">
           <Key>
@@ -897,18 +857,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Project_type_Project">
-          <End Type="Model.Project" Role="Project" Multiplicity="1" />
-          <End Type="Model.Project_type" Role="Project_type" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Project_type">
-              <PropertyRef Name="Project_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Project_User">
           <End Type="Model.User" Role="User" Multiplicity="1" />
           <End Type="Model.Project" Role="Project" Multiplicity="*" />
@@ -1068,18 +1016,9 @@
           <EntitySetMapping Name="Projects">
             <EntityTypeMapping TypeName="Model.Project">
               <MappingFragment StoreEntitySet="Project">
-                <ScalarProperty Name="Project_ype" ColumnName="Project ype" />
+                <ScalarProperty Name="stat" ColumnName="stat" />
                 <ScalarProperty Name="Project_Manager_ID" ColumnName="Project Manager ID" />
                 <ScalarProperty Name="POST_ID" ColumnName="POST ID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Project_types">
-            <EntityTypeMapping TypeName="Model.Project_type">
-              <MappingFragment StoreEntitySet="Project type">
-                <ScalarProperty Name="Pro_type" ColumnName="Pro type" />
-                <ScalarProperty Name="Project_ID" ColumnName="Project ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

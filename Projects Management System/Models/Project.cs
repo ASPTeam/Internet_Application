@@ -11,23 +11,16 @@ namespace Projects_Management_System.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class Project
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Project()
-        {
-            this.Project_type = new HashSet<Project_type>();
-        }
-    
         public int ID { get; set; }
         public int POST_ID { get; set; }
-        public int Project_Manager_ID { get; set; }
-        public int Project_ype { get; set; }
+        public int Project_Manager_ID { get; set;}
+        [Display(Name ="Cusrrent Status")]
+        public string stat { get; set; }
     
         public virtual Post Post { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Project_type> Project_type { get; set; }
         public virtual User User { get; set; }
     }
 }
