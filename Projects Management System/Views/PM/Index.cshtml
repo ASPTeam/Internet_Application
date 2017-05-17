@@ -97,6 +97,7 @@
                                         </th>
                                         <th>Leave</th>
                                         <th>Change Status</th>
+                                        <th>Comment</th>
                                     </tr>
 
                                     @foreach (var item in listposts)
@@ -117,21 +118,49 @@
                                
                                 
                                 <td>
-
-                                    @using (Html.BeginForm("Leave", "PM", new { postid = @item.ID }, FormMethod.Post))
+                                    @if (item.stat != "Delivered")
+                                    {
+                                    using (Html.BeginForm("Leave", "PM", new { postid = @item.ID }, FormMethod.Post))
                                     {
                                         Html.AntiForgeryToken();
 
 
                                         <button type="submit" value="Leave" class="btn btn-success btn btn-sm"><span class="glyphicon glyphicon-remove"></span>Leave</button>
 
+                                        }
                                     }
+                                    else
+                                    {
+                                        <p>Disabled</p>
+                                    }
+
 
                                 </td>
                                 <td>
-                         
+                         @if (item.stat != "Delivered")
+                         {
 
-                                    <a href="@Url.Action("SetStatus", "PM",new { id = @item.ID })" class="btn btn-primary">Change<span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="@Url.Action("SetStatus", "PM", new { id = @item.ID })" class="btn btn-primary">Change<span class="glyphicon glyphicon-edit"></span></a>
+                         }
+                          else
+                                    {
+                                        <p>Disabled</p>
+                                    }
+
+                                </td>
+
+                                <td>
+                                    @if (item.stat != "Delivered")
+                                    {
+                                        <a href="@Url.Action("Comment", "PM",new { postid = @item.POST_ID })" class="btn btn-primary">Comment <span class="glyphicon glyphicon-comment"></span></a>
+
+                                    }
+                                    else
+                                    {
+                                        <p>Disabled</p>
+                                    }
+
+
 
                                 </td>
 

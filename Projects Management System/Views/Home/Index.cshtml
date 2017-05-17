@@ -91,7 +91,15 @@
                                 <th>
                                     Posted By
                                 </th>
-                                
+@if ((string)role == "PM")
+{
+                                <th>
+                                   Select 
+                                </th>
+                                <th>
+                                   Report This User
+                                </th>
+}
                             </tr>
                             @foreach (var item in list)
                             {
@@ -107,16 +115,11 @@
                                     {
                                         <td>
 
-
-
-
-
-
-
-
                                         </td>
 
-
+                                        <td>
+                                            <a href="@Url.Action("Report", "PM",new { userid = @item.User_ID })" class="btn btn-primary">Report <span class="glyphicon glyphicon-remove-sign"></span></a>
+                                        </td>
 
                                     }
 

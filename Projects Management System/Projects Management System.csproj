@@ -272,6 +272,8 @@
     <Content Include="Views\Home\PostNewProject.cshtml" />
     <Content Include="Views\PM\Index.cshtml" />
     <Content Include="Views\PM\SetStatus.cshtml" />
+    <Content Include="Views\PM\Comment.cshtml" />
+    <Content Include="Views\PM\Report.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
