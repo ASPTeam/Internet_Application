@@ -1,0 +1,54 @@
+﻿@model IEnumerable<object>
+@{
+    List<Projects_Management_System.Models.Project> list = Model.ToList()[0] as List<Projects_Management_System.Models.Project>;
+
+    ViewBag.Title = "My Profile";
+    byte[] photo = (byte[])Session["photo"];
+    var base64 = Convert.ToBase64String(photo);
+    var img = string.Format("data:image/jpg;base64,{0}", base64);
+    var first = Session["First"];
+    var last = Session["Last"];
+    var mobile = Session["Mobile"];
+    var jop = Session["jop"];
+    var role = Session["Role"];
+    var id = Session["id"];
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Project Status
+        </th>
+        <th>
+           post Description
+        </th>
+        <th>
+           PM That works on 
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in list) {
+    
+    <tr>
+        <td>
+            @Html.DisplayFor( modelitem => item.stat) 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Post.post_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.User_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

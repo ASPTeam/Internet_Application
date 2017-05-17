@@ -183,9 +183,10 @@ namespace Projects_Management_System.Controllers
                             if (v.Type == "Admin")
                                 return RedirectToAction("Index", "Admin");
                             else if (v.Type == "Customer")
-                                return RedirectToAction("Index", "Home");
+                                return RedirectToAction("Index", "Customer");
                             else if (v.Type == "PM")
                                 return RedirectToAction("Index", "PM");
+                          
 
 
                         }
