@@ -11,12 +11,16 @@ namespace Projects_Management_System.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Make_Report
     {
+        [Key]
         public int ID { get; set; }
         public int Customer_ID { get; set; }
         public int Project_Manager_ID { get; set; }
+        [Display(Name ="Report Details")]
+        [Required(ErrorMessage ="Please Tell us more explaination")]
         public string Report { get; set; }
     
         public virtual User User { get; set; }

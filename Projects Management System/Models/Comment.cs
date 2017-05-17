@@ -11,12 +11,16 @@ namespace Projects_Management_System.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Comment
     {
+        [Key]
         public int ID { get; set; }
         public int Project_Manager_ID { get; set; }
         public int Post_ID { get; set; }
+        [Required(ErrorMessage ="You Can not Leav it Empty")]
+        [Display(Name ="Comment Details")]
         public string Comment_Description { get; set; }
     
         public virtual Post Post { get; set; }

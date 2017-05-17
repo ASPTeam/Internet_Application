@@ -38,7 +38,7 @@ namespace Projects_Management_System.Controllers
 
             return RedirectToAction("Index", "PM");
         }
-
+ 
         public ActionResult SetStatus(int? id)
         {
             if (id == null)
@@ -56,7 +56,6 @@ namespace Projects_Management_System.Controllers
             return View(project);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SetStatus(Project project)
@@ -71,7 +70,46 @@ namespace Projects_Management_System.Controllers
             ViewBag.Project_Manager_ID = new SelectList(db.Users, "ID", "User_Name", project.Project_Manager_ID);
             return View(project);
         }
+        [HttpGet]
+        public ActionResult Comment()
+        {
+            return View();
 
+        }
+        [HttpPost]
+        public ActionResult Comment(int postid , Comment comment  )
+        {
+            comment.Project_Manager_ID = (int)Session["id"];
+            comment.Post_ID = postid;
+            if (ModelState.IsValid)
+            {
+                db.Comments.Add(comment);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index", "PM");
+
+        }
+        [HttpGet]
+        public ActionResult Report()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Report(int userid, Make_Report r)
+        {
+            r.Customer_ID = userid;
+            r.Project_Manager_ID = (int)Session["id"];
+
+            if (ModelState.IsValid)
+            { 
+                db.Make_Reports.Add(r);
+                db.SaveChanges();
+               
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
         protected override void Dispose(bool disposing)
         {
