@@ -34,12 +34,29 @@ namespace Projects_Management_System.Controllers
         ).Contains(f.Project_ID)
                     select f;
             project.Add(filter.ToList());
+
+            var result = from y in db.Posts
+                         where (
+                                     from x in db.Responding_Posts
+
+                                     select x.Post_ID
+                                 ).Contains(y.ID)
+                         select y;
+            var userid = (int)Session["id"];
+            var filterpost = from filterpos in result where filterpos.User_ID == userid && !(
+                                     from x in db.Projects
+
+                                     select x.POST_ID
+                                 ).Contains(filterpos.ID)
+
+                             select filterpos;
+
+            var user = from u in db.Users where u.Job_Description == "PM" select u;
+            project.Add(filterpost.ToList());
+            project.Add( user.ToList());
             return View(project);
         }
-
-        
-
-      
+ 
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -69,8 +86,6 @@ namespace Projects_Management_System.Controllers
             return View();
         }
 
-       
-     
         [HttpPost]
         public ActionResult Deleteposts(int postid)
         {
@@ -100,7 +115,17 @@ namespace Projects_Management_System.Controllers
 
         return  RedirectToAction("Index","Customer");
         }
+        [HttpPost]
+        public ActionResult AssigntoPM (int postid , int managerid ,string stat ,Project project)
+        {
+            project.POST_ID = postid;
+            project.Project_Manager_ID = managerid;
+            project.stat = stat;
+            db.Projects.Add(project);
+            db.SaveChanges();
 
+            return RedirectToAction("Index","Customer");
+        }
         [HttpPost]
         public ActionResult DeleteRequest (int requestid , Sending_Request req)
         {

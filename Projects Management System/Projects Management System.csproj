@@ -200,6 +200,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PMController.cs" />
+    <Compile Include="Controllers\TLController.cs" />
     <Compile Include="crypto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -279,6 +280,7 @@
     <Content Include="Views\PM\Report.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\TL\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

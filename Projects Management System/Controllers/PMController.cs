@@ -20,6 +20,8 @@ namespace Projects_Management_System.Controllers
             List<object> listprojects = new List<object>();
             Managment db = new Managment();
             listprojects.Add(db.Projects.ToList());
+            var user = from u in db.Users where u.Job_Description == "TL" || u.Job_Description == "JE" select u;
+            listprojects.Add(user.ToList());
                 return View(listprojects);
         }
 
@@ -122,7 +124,12 @@ namespace Projects_Management_System.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        [HttpPost]
+        public ActionResult SendRequest()
+        {
+           
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -2,6 +2,8 @@
 @{
     List<Projects_Management_System.Models.Project> list = Model.ToList()[0] as List<Projects_Management_System.Models.Project>;
     List<Projects_Management_System.Models.Sending_Request> req = Model.ToList()[1] as List<Projects_Management_System.Models.Sending_Request>;
+    List<Projects_Management_System.Models.Post> post = Model.ToList()[2] as List<Projects_Management_System.Models.Post>;
+    List<Projects_Management_System.Models.User>  user = Model.ToList()[3] as List<Projects_Management_System.Models.User>;
 
     ViewBag.Title = "My Profile";
     byte[] photo = (byte[])Session["photo"];
@@ -165,6 +167,60 @@
 </div>
                         </div>
                     </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12" >
+                        <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll" >
+                            <div class="panel-heading">
+                                <h3>All current Approved not Assigned posts </h3>
+                            </div>
+                                <div class="panel-body table-responsive">
+                                    <table class="table table-condensed table-bordered table-hover">
+
+                                        <tr class="danger">
+                                            <th> Project Details </th>
+                                            <th> PMs Available </th>
+                                        </tr>
+                                        @foreach (var item in post)
+                                        {
+                                           
+                                           
+                                            
+                                            foreach (var u in user)
+                                            {
+                                            <tr class="success">
+                                                <td>@Html.DisplayFor(model => item.post_Description)</td>
+                                               
+                                                <td> @Html.DisplayFor(model => u.User_Name) 
+                                                
+                                                 
+                                                    @using (Html.BeginForm("AssigntoPM", "Customer", new { postid = @item.ID, managerid = u.ID , stat = "On Progress" }, FormMethod.Post))
+                                                    {
+                                                        Html.AntiForgeryToken();
+
+
+                                                        <button type="submit" value="AssigntoPM" class="btn btn-success btn btn-sm"><span class="glyphicon glyphicon-arrow-right"></span> Assign</button>
+                                                    }
+                                                </td>
+
+                                            </tr>
+
+
+                                            }
+                                        
+
+                                        }
+
+                                    </table>
+
+                               
+                            </div> 
+                        </div>
+
+                    </div>
+
 
                 </div>
 

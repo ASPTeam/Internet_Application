@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "PM Profile";
     List<Projects_Management_System.Models.Project> listposts = Model.ToList()[0] as List<Projects_Management_System.Models.Project>;
+    List<Projects_Management_System.Models.User> listuser = Model.ToList()[1] as List<Projects_Management_System.Models.User>;
     byte[] photo = (byte[])Session["photo"];
     var base64 = Convert.ToBase64String(photo);
     var img = string.Format("data:image/jpg;base64,{0}", base64);
@@ -11,6 +12,7 @@
     var mobile = Session["Mobile"];
     var jop = Session["jop"];
     var role = Session["Role"];
+    var id = Session["id"];
 }
 @if (Request.IsAuthenticated)
 {
@@ -98,6 +100,7 @@
                                         <th>Leave</th>
                                         <th>Change Status</th>
                                         <th>Comment</th>
+                                        <th>Find Memmbers </th>
                                     </tr>
 
                                     @foreach (var item in listposts)
@@ -105,7 +108,9 @@
 
                                         if (item.Project_Manager_ID == (int)Session["id"])
                                         {
-                            <tr class="success text-capitalize">
+
+
+                                     <tr class="success text-capitalize">
                                 <td>
                                     @Html.DisplayFor(modelItem => item.stat)
                                 </td>
@@ -163,9 +168,23 @@
 
 
                                 </td>
+                                
+                                <td>
+                                    
+                                   
 
-                            </tr>      
+                                </td>
+
+                               
+
+                            </tr>
+
+
+
                                         }
+
+                                    }
+                              
                                     }
                                  
                                 </table>
@@ -183,10 +202,56 @@
                     <div class="col-sm-12">
                         <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll">
                             <div class="panel-heading">
-                                <h3 class="panel-title">All current Pending Posts </h3>
+                                <h3 class="panel-title">Available Team Leaders And Junior Engineers</h3>
                             </div>
                             <div class="panel-body table-responsive">
-                              
+                              <table class="table table-condensed table-bordered table-hover" >
+
+                                  <tr class="danger">
+
+                                      <td>
+                                          Actor Name 
+                                      </td>
+
+                                      <td>
+                                         Actor Email
+                                      </td>
+
+                                      <td>
+                                          Actor Job 
+                                      </td>
+
+                                  </tr>
+
+                                  @foreach (var user in listuser)
+                                  {
+                                      <tr class="success">
+
+                                          <td>
+                                              @Html.DisplayFor(model => user.User_Name)
+                                          </td>
+
+                                          <td>
+                                              @Html.DisplayFor(model => user.Email)
+                                          </td>
+
+                                          <td>
+                                              @Html.DisplayFor(model => user.Job_Description)
+                                          </td>
+
+                                         
+                                      </tr>
+
+ 
+                                  }
+
+
+
+
+
+
+
+                              </table>
 
                             </div>
                         </div>
