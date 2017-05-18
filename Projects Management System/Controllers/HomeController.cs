@@ -25,11 +25,22 @@ namespace Projects_Management_System.Controllers
                 var result = from y in db.Posts
                              where (
                                          from x in db.Responding_Posts
-
+                                        
                                          select x.Post_ID
                                      ).Contains(y.ID)
                              select y;
-                mylsit.Add(result.ToList());
+
+            var z = from f in result  where !
+                    (
+                    from p in db.Projects 
+                    select p.POST_ID
+
+
+                    ).Contains(f.ID)
+                    select f;
+
+                mylsit.Add(z.ToList());
+            mylsit.Add(db.Sending_Requests.ToList());
             
             
 

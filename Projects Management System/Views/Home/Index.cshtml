@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Projects Management";
     List<Projects_Management_System.Models.Post> list = Model.ToList()[0] as List<Projects_Management_System.Models.Post>;
+    List<Projects_Management_System.Models.Sending_Request> requestlist = Model.ToList()[1] as List<Projects_Management_System.Models.Sending_Request>;
     byte[] photo = (byte[])Session["photo"];
     var base64 = Convert.ToBase64String(photo);
     var img = string.Format("data:image/jpg;base64,{0}", base64);
@@ -11,7 +12,7 @@
     var mobile = Session["Mobile"];
     var jop = Session["jop"];
     var role = Session["Role"];
-
+    var id = Session["id"];
 }
 @if (Request.IsAuthenticated)
 {
@@ -70,8 +71,8 @@
     <div class="row">
         <div class="col-lg-4 col-md-6 well text-center">
             <h4 class="text-center text-success">Post A New Project Now ! </h4>
-            
-            <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#postPop">Post<span class="glyphicon glyphicon-pencil"></span></button>
+            <button href="@Url.Action("PostNewProject", "Home")" class="btn btn-success btn-lg" data-toggle="modal" data-target="#postPop">Post<span class="glyphicon glyphicon-pencil"></span></button>
+
         </div>
 
         <div class="col-lg-8 col-md-6">
@@ -99,7 +100,19 @@
                                 <th>
                                    Report This User
                                 </th>
+
 }
+
+                                else if ((string)role == "Customer")
+                                {
+                                    <th>
+                                        Update
+                                    </th>
+                                    <th>
+                                        Remove
+                                       
+                                    </th>
+                                }
                             </tr>
                             @foreach (var item in list)
                             {
@@ -111,17 +124,47 @@
                                         @Html.DisplayFor(modelItem => item.User.User_Name)
                                     </td>
                                  
-                                    @if((string)role=="PM")
+                                    @if ((string)role == "PM")
                                     {
-                                        <td>
 
+
+                                              <td>
+
+                                            @using (Html.BeginForm("SendingRequestToCustomer", "PM", new { userid = @item.User_ID, projectid = @item.ID }, FormMethod.Post))
+                                            {
+                                                Html.AntiForgeryToken();
+
+
+                                                <button type="submit" value="SendingRequestToCustomer" class="btn btn-primary btn btn-sm"><span class="glyphicon glyphicon-plus-sign"></span> Sending Reqeust</button>
+
+                                            }
                                         </td>
+
+                                    
 
                                         <td>
                                             <a href="@Url.Action("Report", "PM",new { userid = @item.User_ID })" class="btn btn-primary">Report <span class="glyphicon glyphicon-remove-sign"></span></a>
                                         </td>
 
                                     }
+                                    else if ((string)role == "Customer" && item.User_ID ==(int) id)
+                                    {
+                                        <td>
+                                            <a href="@Url.Action("Edit", "Customer",new { id = @item.ID })" class="btn btn-primary"> Edit <span class="glyphicon glyphicon-edit"></span></a>
+                                        </td>
+
+                                        <td>
+                                       @using (Html.BeginForm("Deleteposts", "Customer", new { postid = @item.ID }, FormMethod.Post))
+                                       {
+                                           Html.AntiForgeryToken();
+
+
+                                        <button type="submit" value="Deleteposts" class="btn btn-danger btn btn-sm"><span class="glyphicon glyphicon-remove"></span>Delete</button>
+                                       }
+                                        </td>
+
+                                    }
+
 
                                 </tr>
                             }

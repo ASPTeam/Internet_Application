@@ -23,112 +23,94 @@ namespace Projects_Management_System.Controllers
             var id  = (int)Session["id"];
             var v = from c in db.Projects where c.Post.User_ID == id select c;
             project.Add(v.ToList());
+            var request = from req in db.Sending_Requests where req.Reciever_ID == id select req;
+            var filter = from f in request
+                         where !
+        (
+        from p in db.Projects
+        select p.POST_ID
+
+
+        ).Contains(f.Project_ID)
+                    select f;
+            project.Add(filter.ToList());
             return View(project);
         }
 
-        // GET: Customer/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
-            return View(project);
-        }
+        
 
-        // GET: Customer/Create
-        public ActionResult Create()
-        {
-            ViewBag.POST_ID = new SelectList(db.Posts, "ID", "post_Description");
-            ViewBag.Project_Manager_ID = new SelectList(db.Users, "ID", "User_Name");
-            return View();
-        }
-
-        // POST: Customer/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,POST_ID,Project_Manager_ID,stat")] Project project)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Projects.Add(project);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.POST_ID = new SelectList(db.Posts, "ID", "post_Description", project.POST_ID);
-            ViewBag.Project_Manager_ID = new SelectList(db.Users, "ID", "User_Name", project.Project_Manager_ID);
-            return View(project);
-        }
-
-        // GET: Customer/Edit/5
+      
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = db.Projects.Find(id);
-            if (project == null)
+            Post post = db.Posts.Find(id);
+            if (post == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.POST_ID = new SelectList(db.Posts, "ID", "post_Description", project.POST_ID);
-            ViewBag.Project_Manager_ID = new SelectList(db.Users, "ID", "User_Name", project.Project_Manager_ID);
-            return View(project);
+           
+            return View();
         }
 
-        // POST: Customer/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,POST_ID,Project_Manager_ID,stat")] Project project)
+        public ActionResult Edit([Bind(Exclude =  "ID,User_ID")] Post post)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(project).State = EntityState.Modified;
+                db.Entry(post).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
-            ViewBag.POST_ID = new SelectList(db.Posts, "ID", "post_Description", project.POST_ID);
-            ViewBag.Project_Manager_ID = new SelectList(db.Users, "ID", "User_Name", project.Project_Manager_ID);
-            return View(project);
+            return View();
         }
 
-        // GET: Customer/Delete/5
-        public ActionResult Delete(int? id)
+       
+     
+        [HttpPost]
+        public ActionResult Deleteposts(int postid)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
-            return View(project);
-        }
-
-        // POST: Customer/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Project project = db.Projects.Find(id);
-            db.Projects.Remove(project);
+            var delete = db.Responding_Posts.FirstOrDefault(s => s.Post_ID == postid);
+            db.Responding_Posts.Remove(delete);
+           Post post = db.Posts.Find(postid);
+         
+            db.Posts.Remove(post);
+         
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public ActionResult AcceptRequest(int postid , int ManagerID ,int requestid, Project project)
+        {
+            project.POST_ID = postid;
+            project.Project_Manager_ID = ManagerID;
+            project.stat = "On Progress";
+            db.Projects.Add(project);
+            Sending_Request req = db.Sending_Requests.Find(requestid);
+            db.Sending_Requests.Remove(req);
+            db.SaveChanges();
+
+
+
+        return  RedirectToAction("Index","Customer");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteRequest (int requestid , Sending_Request req)
+        {
+
+            req = db.Sending_Requests.Find(requestid);
+            db.Sending_Requests.Remove(req);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Customer");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

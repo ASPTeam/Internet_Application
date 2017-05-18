@@ -110,6 +110,19 @@ namespace Projects_Management_System.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        [HttpPost]
+        public ActionResult SendingRequestToCustomer (int userid , int projectid , Sending_Request request)
+        {
+            request.Sender_ID =(int)Session["id"];
+            request.Reciever_ID = userid;
+            request.Project_ID = projectid;
+            db.Sending_Requests.Add(request);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

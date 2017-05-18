@@ -277,9 +277,6 @@
     <Content Include="Views\PM\SetStatus.cshtml" />
     <Content Include="Views\PM\Comment.cshtml" />
     <Content Include="Views\PM\Report.cshtml" />
-    <Content Include="Views\Customer\Create.cshtml" />
-    <Content Include="Views\Customer\Delete.cshtml" />
-    <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <None Include="Web.Debug.config">
