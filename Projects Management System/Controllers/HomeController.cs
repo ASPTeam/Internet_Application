@@ -14,7 +14,7 @@ namespace Projects_Management_System.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize(Roles ="Customer,Admin,PM,TL")]
+        [Authorize(Roles ="Customer,Admin,PM,TL,JE")]
         public ActionResult Index()
         {
             List<object> mylsit = new List<object>();
@@ -199,6 +199,8 @@ namespace Projects_Management_System.Controllers
                                 return RedirectToAction("Index", "PM");
                             else if (v.Type == "TL")
                                 return RedirectToAction("Index", "TL");
+                            else if (v.Type == "JE")
+                                return RedirectToAction("Index", "JE");
 
 
 
