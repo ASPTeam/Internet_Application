@@ -1,0 +1,259 @@
+﻿@model IEnumerable<object>
+@{
+    ViewBag.Title = "My Profile";
+    List<Projects_Management_System.Models.Sending_Request> req = Model.ToList()[0] as List<Projects_Management_System.Models.Sending_Request>;
+    List<Projects_Management_System.Models.Project> pro = Model.ToList()[1] as List<Projects_Management_System.Models.Project>;
+
+    byte[] photo = (byte[])Session["photo"];
+    var base64 = Convert.ToBase64String(photo);
+    var img = string.Format("data:image/jpg;base64,{0}", base64);
+    var first = Session["First"];
+    var last = Session["Last"];
+    var mobile = Session["Mobile"];
+    var jop = Session["jop"];
+    var role = Session["Role"];
+    var id = Session["id"];
+}
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutform" }))
+    {
+        <nav class="navbar navbar-inverse ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Manageitforyou.com</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    </ul>
+                    <a href="@Url.Action("Index", "TL")" class="btn btn-primary">My profile<span class="glyphicon glyphicon-user"></span></a>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><p class="navbar-text">@HttpContext.Current.User.Identity.Name</p></li>
+
+                        <li><a href="javascript:document.getElementById('logoutform').submit()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    }
+
+    <div class="container-fluid text-center">
+        <div class="row">
+
+            <div class="col-sm-2 well table-responsive ">
+                <div class="well ">
+                    <p>Profile Information</p>
+                    <img src="@img" class="img-responsive img-circle" />
+                </div>
+
+                <table class="table table-condensed table-hover">
+                    <tr>
+                        <td class="danger">First Name</td>
+                        <td class="success"><strong>@first</strong></td>
+
+                    </tr>
+                    <tr>
+                        <td class="danger">Last Name </td>
+                        <td class="success"><strong>@last</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="danger"> Job Description </td>
+                        <td class="success"><strong>@jop</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="danger">Mobile  </td>
+                        <td class="success"><strong>@mobile</strong></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-md-10">
+
+                <div class="row ">
+                    <div class="col-sm-12">
+                        <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">All  Currents Requests</h3>
+                               
+                            </div>
+                            <div class="panel-body table-responsive ">
+                                <table class="table table-condensed table-bordered table-hover ">
+                                    <tr class="danger text-capitalize">
+
+                                        <th>
+                                          Sent BY 
+                                        </th>
+
+                                        <th>
+                                            Email
+                                        </th>
+
+                                        <th>
+                                            Accept 
+                                        </th>
+
+                                        <th>
+                                            Reject
+                                        </th>
+
+
+                                      
+                                    </tr>
+
+
+                                    @foreach (var item in req)
+                                    {
+                                        <tr class="success">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User.User_Name)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User.Email)
+                                            </td>
+
+
+                                            <td>
+                                                @using (Html.BeginForm("AcceptORreject", "TL", new { requestid = @item.ID, userid = id, stat = true }, FormMethod.Post))
+                                                {
+                                                    Html.AntiForgeryToken();
+
+
+                                                    <button type="submit" value="Accept" class="btn btn-danger btn btn-sm"><span class="glyphicon glyphicon-arrow-right"></span> Accept Request</button>
+                                                }
+
+                                            </td>
+
+
+                                            <td>
+                                                @using (Html.BeginForm("AcceptORreject", "TL", new { requestid = @item.ID , userid = id , stat = false}, FormMethod.Post))
+                                                {
+                                                    Html.AntiForgeryToken();
+
+
+                                                    <button type="submit" value="Reject" class="btn btn-danger btn btn-sm"><span class="glyphicon glyphicon-remove-circle"></span> Reject Request</button>
+                                                }
+
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </table>
+
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="row ">
+                    <div class="col-sm-12">
+                        <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">All  Currents and History Projects </h3>
+
+                            </div>
+                            <div class="panel-body table-responsive ">
+                                <table class="table table-condensed table-bordered table-hover ">
+                                    <tr class="danger text-capitalize">
+
+                                        <th>
+                                         Customer
+                                        </th>
+                                        <th>
+                                            PM
+                                        </th>
+                                        <th>
+                                        Details
+                                        </th>
+                                        <th>
+                                           Send TO Je
+                                        </th>
+
+                                    </tr>
+
+
+                                    @foreach (var item in pro)
+                                    {
+                                        <tr class="success">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Post.User.User_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.User.User_Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Post.post_Description)
+                                            </td>
+
+
+                                           
+                                            <td>
+                                                @if (item.stat != "Delivered")
+                                                {
+                                                    using (Html.BeginForm("SendRequest", "PM", new { senderid = id, postid = @item.ID }, FormMethod.Post))
+                                                    {
+                                                        Html.AntiForgeryToken();
+
+
+                                                        <input id="Text1" type="email" required name="mail" />
+                                                        <button type="submit" value="SendRequest" class="btn btn-primary btn btn-sm"><span class="glyphicon glyphicon-send"></span>Send</button>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <p>Disabled</p>
+                                                }
+
+
+
+                                            </td>
+                                           
+                                           
+
+
+                                           
+                                           
+
+                                          
+                                           
+
+                                           
+
+                                        </tr>
+                                    }
+
+                                </table>
+
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        </div>
+}

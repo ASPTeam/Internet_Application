@@ -100,7 +100,7 @@
                                         <th>Leave</th>
                                         <th>Change Status</th>
                                         <th>Comment</th>
-                                        <th>Find Memmbers </th>
+                                        <th>Send Request</th>
                                     </tr>
 
                                     @foreach (var item in listposts)
@@ -120,7 +120,7 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Post.User.User_Name)
                                 </td>
-                               
+                              
                                 
                                 <td>
                                     @if (item.stat != "Delivered")
@@ -128,8 +128,7 @@
                                     using (Html.BeginForm("Leave", "PM", new { postid = @item.ID }, FormMethod.Post))
                                     {
                                         Html.AntiForgeryToken();
-
-
+                                           
                                         <button type="submit" value="Leave" class="btn btn-success btn btn-sm"><span class="glyphicon glyphicon-remove"></span>Leave</button>
 
                                         }
@@ -169,13 +168,29 @@
 
                                 </td>
                                 
-                                <td>
-                                    
-                                   
+                             
+                                         <td>
+                                             @if (item.stat != "Delivered")
+                                             { 
+                                             using (Html.BeginForm("SendRequest", "PM", new {senderid =id ,postid=@item.ID  }, FormMethod.Post))
+                                             {
+                                                 Html.AntiForgeryToken();
 
-                                </td>
 
-                               
+                                                 <input id="Text1" type="email" required name="mail" />
+                                                 <button type="submit" value="SendRequest" class="btn btn-primary btn btn-sm"><span class="glyphicon glyphicon-send"></span>Send</button>
+                                                 }
+                                             }
+                                             else
+                                             {
+                                                <p>Disabled</p>
+                                             }
+
+
+
+                                         </td>
+
+
 
                             </tr>
 
@@ -185,7 +200,7 @@
 
                                     }
                               
-                                    }
+                                    
                                  
                                 </table>
 
@@ -209,17 +224,18 @@
 
                                   <tr class="danger">
 
-                                      <td>
+                                      <th>
                                           Actor Name 
-                                      </td>
+                                      </th>
 
-                                      <td>
+                                      <th>
                                          Actor Email
-                                      </td>
+                                      </th>
 
-                                      <td>
+                                      <th>
                                           Actor Job 
-                                      </td>
+                                      </th>
+                                    
 
                                   </tr>
 
@@ -239,6 +255,8 @@
                                               @Html.DisplayFor(model => user.Job_Description)
                                           </td>
 
+                                        
+                                         
                                          
                                       </tr>
 

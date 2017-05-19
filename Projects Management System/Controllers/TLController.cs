@@ -17,8 +17,30 @@ namespace Projects_Management_System.Controllers
             List<object> TL = new List<object>();
             var id = (int)Session["id"];
 
-            var req = from r in db.Sending_Requests where r.Reciever_ID == id select r;
-            TL.Add(req.ToList());
+          //  var req = from r in db.Sending_Requests where r.Reciever_ID == id select r;
+            var result = from y in db.Sending_Requests
+                         where  ! (
+                                     from x in db.Responding_Requests
+                                     
+                                     select x.Request_ID
+                                 ).Contains(y.ID)
+                         select y;
+           
+            TL.Add(result.ToList());
+            var project = from c in db.Projects where (
+
+                from y in db.Sending_Requests
+                where (
+                            from x in db.Responding_Requests
+
+                            select x.Request_ID
+                        ).Contains(y.ID)
+                select y.Project_ID).Contains(c.ID) select  c;
+                       
+
+     
+
+            TL.Add(project.ToList());
 
             return View(TL);
         }
@@ -37,7 +59,7 @@ namespace Projects_Management_System.Controllers
         }
 
 
-
+       
 
         protected override void Dispose(bool disposing)
         {

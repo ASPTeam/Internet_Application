@@ -125,10 +125,24 @@ namespace Projects_Management_System.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendRequest()
+        public ActionResult SendRequest(int senderid , int postid, Sending_Request send)
         {
-           
-            return View();
+            
+           var v = Request["mail"];
+            var mail = Session["Email"];
+            if (v != (string)mail)
+            {
+                var f = db.Users.Where(e => e.Email == v).FirstOrDefault();
+                send.Sender_ID = senderid;
+                send.Project_ID = postid;
+                send.Reciever_ID = f.ID;
+                db.Sending_Requests.Add(send);
+                db.SaveChanges();
+            }
+
+            
+            return RedirectToAction("Index", "PM");
+          
         }
 
         protected override void Dispose(bool disposing)

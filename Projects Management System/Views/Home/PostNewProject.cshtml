@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Post New Project";
 }
-<button class="btn" data-target="#postPop" data-toggle="modal">Open</button>
 <div class="modal fade" id="postPop" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -26,7 +25,7 @@
                 @Html.LabelFor(model => model.post_Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.post_Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.post_Description, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.post_Description, "", new { @class = "text-danger"})
                 </div>
                 @Html.ValidationMessage("Not Allowd", new { @class = "text-danger" })
             </div>
@@ -47,7 +46,8 @@
 
 
 @section scripts{
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+    <script src="~/Scripts/pop_ups.js"></script>
 }

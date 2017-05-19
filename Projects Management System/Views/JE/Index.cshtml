@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "My Profile";
     List<Projects_Management_System.Models.Sending_Request> req = Model.ToList()[0] as List<Projects_Management_System.Models.Sending_Request>;
+    List<Projects_Management_System.Models.Project> pro = Model.ToList()[1] as List<Projects_Management_System.Models.Project>;
 
     byte[] photo = (byte[])Session["photo"];
     var base64 = Convert.ToBase64String(photo);
@@ -84,14 +85,14 @@
                         <div class="panel panel-success" style="max-height:500px ;min-height:500px;overflow-y:scroll">
                             <div class="panel-heading">
                                 <h3 class="panel-title">All  Currents Requests</h3>
-                               
+
                             </div>
                             <div class="panel-body table-responsive ">
                                 <table class="table table-condensed table-bordered table-hover ">
                                     <tr class="danger text-capitalize">
 
                                         <th>
-                                          Sent BY 
+                                            Sent BY
                                         </th>
 
                                         <th>
@@ -99,7 +100,7 @@
                                         </th>
 
                                         <th>
-                                            Accept 
+                                            Accept
                                         </th>
 
                                         <th>
@@ -107,7 +108,7 @@
                                         </th>
 
 
-                                      
+
                                     </tr>
 
 
@@ -124,7 +125,7 @@
 
 
                                             <td>
-                                                @using (Html.BeginForm("AcceptORreject", "TL", new { requestid = @item.ID, userid = id, stat = true }, FormMethod.Post))
+                                                @using (Html.BeginForm("AcceptORreject", "JE", new { requestid = @item.ID, userid = id, stat = true }, FormMethod.Post))
                                                 {
                                                     Html.AntiForgeryToken();
 
@@ -136,7 +137,7 @@
 
 
                                             <td>
-                                                @using (Html.BeginForm("AcceptORreject", "TL", new { requestid = @item.ID , userid = id , stat = false}, FormMethod.Post))
+                                                @using (Html.BeginForm("AcceptORreject", "JE", new { requestid = @item.ID, userid = id, stat = false }, FormMethod.Post))
                                                 {
                                                     Html.AntiForgeryToken();
 
@@ -174,51 +175,36 @@
                                     <tr class="danger text-capitalize">
 
                                         <th>
-                                           Project Details
+                                            Customer
                                         </th>
-
                                         <th>
-                                          Status
+                                            PM
+                                        </th>
+                                        <th>
+                                            Details
                                         </th>
 
                                     </tr>
 
 
-                                    @foreach (var item in req)
+                                    @foreach (var item in pro)
                                     {
                                         <tr class="success">
                                             <td>
+                                                @Html.DisplayFor(modelItem => item.Post.User.User_Name)
+                                            </td>
+                                            <td>
                                                 @Html.DisplayFor(modelItem => item.User.User_Name)
                                             </td>
-
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.User.Email)
+                                                @Html.DisplayFor(modelItem => item.Post.post_Description)
                                             </td>
 
 
-                                            <td>
-                                                @using (Html.BeginForm("AcceptORreject", "TL", new { requestid = @item.ID, userid = id, stat = true }, FormMethod.Post))
-                                                {
-                                                    Html.AntiForgeryToken();
+                                           
 
 
-                                                    <button type="submit" value="Accept" class="btn btn-danger btn btn-sm"><span class="glyphicon glyphicon-arrow-right"></span> Accept Request</button>
-                                                }
-
-                                            </td>
-
-
-                                            <td>
-                                                @using (Html.BeginForm("AcceptORreject", "TL", new { requestid = @item.ID, userid = id, stat = false }, FormMethod.Post))
-                                                {
-                                                    Html.AntiForgeryToken();
-
-
-                                                    <button type="submit" value="Reject" class="btn btn-danger btn btn-sm"><span class="glyphicon glyphicon-remove-circle"></span> Reject Request</button>
-                                                }
-
-                                            </td>
-
+                                   
                                         </tr>
                                     }
 
@@ -237,5 +223,5 @@
 
             </div>
         </div>
-        </div>
+    </div>
 }

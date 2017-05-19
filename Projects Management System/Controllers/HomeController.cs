@@ -180,6 +180,7 @@ namespace Projects_Management_System.Controllers
                         Session["photo"] = v.Photo;
                         Session["id"] = v.ID;
                         Session["Role"] = v.Type;
+                        Session["Email"] = v.Email;
                        
 
                         if (Url.IsLocalUrl(Retunurl))
